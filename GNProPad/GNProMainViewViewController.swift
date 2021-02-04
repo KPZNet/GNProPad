@@ -18,7 +18,7 @@ class GNProMainViewViewController: UIViewController {
     }
     
     @IBAction func Drser(_ sender: AnyObject) {
-        gnScatterPlot.DrawMark()
+        gnScatterPlot.DrawPlotOne()
         gnScatterPlot.setNeedsDisplay()
     }
     /*

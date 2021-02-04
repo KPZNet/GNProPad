@@ -17,15 +17,21 @@ class GNScatterPlotView: GNBaseView {
         self.layer.sublayers = nil
             if(drawMarkOne)
             {
-                super.DrawMark()
+                DrawPlot1()
             }
         ReleaseScales()
     }
     
-    override func DrawMark()
+    func DrawPlotOne()
     {
         drawMarkOne = true
         
+    }
+    
+    func DrawPlot1()
+    {
+        let center = CGPoint(x: 0 , y: 0)
+        super.DrawMark(Mark: center)
     }
 
 }

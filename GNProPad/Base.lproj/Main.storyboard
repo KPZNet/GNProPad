@@ -31,7 +31,7 @@
                                     <action selector="Drser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e28-RL-eUc"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxF-hz-gsS" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="lxF-hz-gsS" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
                                 <rect key="frame" x="20" y="95" width="1326" height="909"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                             </view>
