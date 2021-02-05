@@ -94,7 +94,6 @@ class GNScatterPlotView: UIView {
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder:aDecoder)
-        SetupScales(XMin: -5, XMax: 5, YMin: -5, YMax: 5)
     }
     
     func SetupScales(XMin inXmin:CGFloat, XMax inXMax:CGFloat, YMin inYmin:CGFloat, YMax inYMax:CGFloat)
@@ -124,29 +123,22 @@ class GNScatterPlotView: UIView {
         return nValue
     }
     
-
+    func DrawScales(){
+        
+    }
+    
     func DrawMark(DataPoint dataPoint : XYData)
     {
-        // Get the context
         let context = UIGraphicsGetCurrentContext()
         
         let xyPlotPoint = DataPointToPlotPoint(Value: dataPoint)
         let c = CGPoint(x: xyPlotPoint.x, y: xyPlotPoint.y)
-        // Draw the arc around the circle
         context?.addArc(center: c, radius: plotDataMarkerSize, startAngle: CGFloat(0), endAngle: CGFloat(2.0 * Double.pi), clockwise: true)
                 
-        // Set the fill color (if you are filling the circle)
         context?.setFillColor(xyPlotPoint.pointColor.cgColor)
-        
-        // Set the stroke color
         context?.setStrokeColor(UIColor.blue.cgColor)
-        
-        // Set the line width
         context?.setLineWidth(CGFloat(plotDataMarkerLineWidth))
-        
-        // Draw the arc
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
-        
     }
     
 }
