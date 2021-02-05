@@ -10,6 +10,7 @@ import UIKit
 class GNProMainViewViewController: UIViewController {
 
     @IBOutlet weak var gnScatterPlot: GNScatterPlotView!
+    @IBOutlet weak var gnScatterPlot2: GNScatterPlotView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,13 +18,12 @@ class GNProMainViewViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func Drser(_ sender: AnyObject) {
-        
+    fileprivate func PlotRandoScatter(Plot plt : GNScatterPlotView) {
         var dataSetXY = XYDataSet()
         
         let xm:Float = 50.0
         let ym:Float = 50.0
-        gnScatterPlot.SetupScales(XMin: 0, XMax: CGFloat(xm), YMin: 0, YMax: CGFloat(ym))
+        plt.SetupScales(XMin: 0, XMax: CGFloat(xm), YMin: 0, YMax: CGFloat(ym))
         
         for _ in 1...100{
             let randX = Float.random(in: 0...xm)
@@ -35,10 +35,16 @@ class GNProMainViewViewController: UIViewController {
             
             let xy = XYData(x : randX, y:randY, color:kolor)
             dataSetXY.dataValues.append(xy)
-            gnScatterPlot.AddDataSet(DataSet: dataSetXY)
+            plt.AddDataSet(DataSet: dataSetXY)
         }
+        
+        plt.TurnOnPlot()
+    }
     
-        gnScatterPlot.TurnOnPlot()
+    @IBAction func Drser(_ sender: AnyObject) {
+        
+        PlotRandoScatter(Plot: gnScatterPlot)
+        PlotRandoScatter(Plot: gnScatterPlot2)
     }
     
     /*
