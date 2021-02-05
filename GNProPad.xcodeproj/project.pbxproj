@@ -15,7 +15,6 @@
 		71623C0B25CB1FE9008460B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71623C0925CB1FE9008460B3 /* LaunchScreen.storyboard */; };
 		71623C1625CB1FE9008460B3 /* GNProPadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C1525CB1FE9008460B3 /* GNProPadTests.swift */; };
 		71623C2125CB1FE9008460B3 /* GNProPadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C2025CB1FE9008460B3 /* GNProPadUITests.swift */; };
-		71623C3525CB2461008460B3 /* GNBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C3425CB2461008460B3 /* GNBaseView.swift */; };
 		71623C3A25CB48DF008460B3 /* GNScatterPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */; };
 		71623C3F25CB5D54008460B3 /* GNProMainViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */; };
 /* End PBXBuildFile section */
@@ -52,7 +51,6 @@
 		71623C1C25CB1FE9008460B3 /* GNProPadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GNProPadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71623C2025CB1FE9008460B3 /* GNProPadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNProPadUITests.swift; sourceTree = "<group>"; };
 		71623C2225CB1FE9008460B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71623C3425CB2461008460B3 /* GNBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNBaseView.swift; sourceTree = "<group>"; };
 		71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNScatterPlotView.swift; sourceTree = "<group>"; };
 		71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNProMainViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,7 +110,6 @@
 				71623C0725CB1FE9008460B3 /* Assets.xcassets */,
 				71623C0925CB1FE9008460B3 /* LaunchScreen.storyboard */,
 				71623C0C25CB1FE9008460B3 /* Info.plist */,
-				71623C3425CB2461008460B3 /* GNBaseView.swift */,
 				71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */,
 				71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */,
 			);
@@ -270,7 +267,6 @@
 				71623C0325CB1FE8008460B3 /* ViewController.swift in Sources */,
 				71623C3A25CB48DF008460B3 /* GNScatterPlotView.swift in Sources */,
 				71623BFF25CB1FE8008460B3 /* AppDelegate.swift in Sources */,
-				71623C3525CB2461008460B3 /* GNBaseView.swift in Sources */,
 				71623C0125CB1FE8008460B3 /* SceneDelegate.swift in Sources */,
 				71623C3F25CB5D54008460B3 /* GNProMainViewViewController.swift in Sources */,
 			);

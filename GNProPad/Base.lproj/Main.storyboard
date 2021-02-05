@@ -42,6 +42,25 @@
                                 <rect key="frame" x="842" y="147" width="504" height="856"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7lW-ft-KLI">
+                                <rect key="frame" x="20" y="147" width="405" height="421"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReuseIdentifier" id="vFH-1R-z89">
+                                        <rect key="frame" x="0.0" y="28" width="405" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vFH-1R-z89" id="H1F-gV-kqM">
+                                            <rect key="frame" x="0.0" y="0.0" width="405" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="L2o-ao-IJl"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="jlv-hH-B0r"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -68,6 +87,7 @@
                         <outlet property="gnScatterPlot" destination="lxF-hz-gsS" id="mga-7z-Jdy"/>
                         <outlet property="gnScatterPlot2" destination="yWs-if-PfX" id="XMk-5J-etX"/>
                         <outlet property="gnScatterPlot3" destination="XS1-GU-TIs" id="MNk-C0-WVa"/>
+                        <outlet property="tableView" destination="7lW-ft-KLI" id="gfN-Ut-Tig"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
