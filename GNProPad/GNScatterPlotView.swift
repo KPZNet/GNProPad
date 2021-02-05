@@ -58,7 +58,7 @@ class GNScatterPlotView: UIView {
     var axisLineWidth : CGFloat = 0.0
     var axisLineColor = UIColor.black
     
-    var plotDataMarkerScaler:CGFloat = 0.015
+    var plotDataMarkerScaler:CGFloat = 0.003
     var plotDataMarkerLineScaler:CGFloat = 0.1
     
     var plotAxisLineWidthScaler:CGFloat = 0.001
@@ -126,7 +126,11 @@ class GNScatterPlotView: UIView {
         xDataToPlotScale = (bounds.size.width - plotMargin2) / CGFloat(xDataRange)
         yDataToPlotScale = (bounds.size.height - plotMargin2) / CGFloat(yDataRange)
         
-        let smallAxis = min(bounds.height, bounds.width)
+        let screenBounds = UIScreen.main.bounds
+        let width = screenBounds.width
+        let height = screenBounds.height
+        let smallAxis = min(height, width)
+        
         plotDataMarkerSize = smallAxis * plotDataMarkerScaler
         
         plotDataMarkerLineWidth = plotDataMarkerSize * plotDataMarkerLineScaler
