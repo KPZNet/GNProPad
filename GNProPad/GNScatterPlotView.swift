@@ -11,15 +11,24 @@ struct XYData {
     var x : Float = 0.0
     var y : Float = 0.0
     var pointColor : UIColor = UIColor.black
-    init(x: Float, y: Float, color: UIColor) {
+    init(x: Float = 0.0, y: Float=0.0, color: UIColor = UIColor.black) {
         self.x   = x
         self.y = y
         self.pointColor  = color
     }
 }
-
+struct XYPlotData {
+    var x : CGFloat = 0.0
+    var y : CGFloat = 0.0
+    var pointColor : UIColor = UIColor.black
+    init(x: CGFloat = 0.0, y: CGFloat=0.0, color: UIColor = UIColor.black) {
+        self.x   = x
+        self.y = y
+        self.pointColor  = color
+    }
+}
 struct XYDataSet {
-    var dValues  = [XYData]()
+    var dataValues  = [XYData]()
     var xLabel : String = "X Label"
     var yLabel : String = "Y Label"
 }
@@ -29,23 +38,18 @@ class GNScatterPlotView: UIView {
     var drawPlot : Bool = false
     var plotData = XYDataSet()
     
-    var pCartesianTrans : CGAffineTransform = CGAffineTransform.identity
+    var xDataToPlotScale:CGFloat = 0.0
+    var yDataToPlotScale:CGFloat = 0.0
     
-    var xScale : CGFloat = 0.0
-    var yScale : CGFloat = 0.0
+    var xDataMin:CGFloat = -5.0
+    var yDataMin:CGFloat = -5.0
+    var xDataMax:CGFloat = 5.0
+    var yDataMax:CGFloat = 5.0
+    var xDataRange : CGFloat = 10.0
+    var yDataRange : CGFloat = 10.0
     
-    var scaleTweak :Float = 0.01
-    
-    var xMin:Float = -5.0
-    var yMin:Float = -5.0
-    var xMax:Float = 5.0
-    var yMax:Float = 5.0
-    var xRange : Float = 10.0
-    var yRange : Float = 10.0
-    
-    var markLineWidth:Float = 1.0
-    
-    var markCGSize = CGSize(width: CGFloat(1.0), height: CGFloat(1.0))
+    var plotDataMarkerSize : CGFloat = 0.0
+    var plotDataMarkerLineWidth: CGFloat = 0.0
     
     func AddDataSet( DataSet inDataSet:XYDataSet){
         plotData = inDataSet
@@ -53,13 +57,11 @@ class GNScatterPlotView: UIView {
     
     override func draw(_ rect: CGRect)
     {
-        //SetScales()
         self.layer.sublayers = nil
         if(drawPlot)
         {
-            DrawMark2()
+            DrawPlot()
         }
-        //ReleaseScales()
     }
     
     func TurnOnPlot()
@@ -70,9 +72,8 @@ class GNScatterPlotView: UIView {
     
     func DrawPlot()
     {
-        for p in plotData.dValues{
-            let c = CGPoint( x: CGFloat(p.x), y: CGFloat(p.y) )
-            DrawMark(Mark: c, Color:p.pointColor)
+        for p in plotData.dataValues{
+            DrawMark(DataPoint: p)
         }
     }
     
@@ -96,100 +97,57 @@ class GNScatterPlotView: UIView {
         SetupScales(XMin: -5, XMax: 5, YMin: -5, YMax: 5)
     }
     
-    func SetScales()
+    func SetupScales(XMin inXmin:CGFloat, XMax inXMax:CGFloat, YMin inYmin:CGFloat, YMax inYMax:CGFloat)
     {
-        UIGraphicsGetCurrentContext()?.saveGState()
+        xDataMin = inXmin
+        xDataMax = inXMax
+        yDataMin = inYmin
+        yDataMax = inYMax
+        xDataRange = abs(xDataMax - xDataMin)
+        yDataRange = abs(yDataMax - yDataMin)
         
-        let context = UIGraphicsGetCurrentContext()
-        context?.concatenate(pCartesianTrans);
+        xDataToPlotScale = bounds.size.width / CGFloat(xDataRange)
+        yDataToPlotScale = bounds.size.height / CGFloat(yDataRange)
+        
+        let smallAxis = min(bounds.height, bounds.width)
+        plotDataMarkerSize = smallAxis * 0.005
+        plotDataMarkerLineWidth = plotDataMarkerSize * 0.1
     }
     
-    func ReleaseScales()
-    {
-        UIGraphicsGetCurrentContext()?.restoreGState()
+    func DataPointToPlotPoint(Value val:XYData) -> XYPlotData{
+        
+        var nValue = XYPlotData()
+        nValue.x = ( CGFloat(val.x) - xDataMin) * xDataToPlotScale
+        nValue.y = (((( CGFloat(val.y) - yDataMin) * yDataToPlotScale)) - bounds.size.height) * -1.0
+        
+        nValue.pointColor = val.pointColor
+        return nValue
     }
     
-    func SetupScales(XMin inXmin:Float, XMax inXMax:Float, YMin inYmin:Float, YMax inYMax:Float)
+
+    func DrawMark(DataPoint dataPoint : XYData)
     {
-        xMin = inXmin
-        xMax = inXMax
-        yMin = inYmin
-        yMax = inYMax
-        xRange = abs(xMax - xMin)
-        yRange = abs(yMax - yMin)
-        
-        markLineWidth = 0.01
-        
-        markCGSize = CGSize(width: CGFloat(xRange * scaleTweak), height: CGFloat(yRange * scaleTweak))
-        pCartesianTrans = GetCartisianTransform()
-    }
-    
-    
-    func GetCartisianTransform() -> CGAffineTransform
-    {
-        var pTempCartesianTransform : CGAffineTransform = CGAffineTransform.identity
-        
-        pTempCartesianTransform = pTempCartesianTransform.translatedBy(x: (self.frame.size.width / 2.0), y: (self.frame.size.height / 2.0));
-        
-        xScale =  (self.frame.width / 1.1) / CGFloat(xRange)
-        yScale =  (self.frame.height / 1.1) / CGFloat(yRange)
-        
-        pTempCartesianTransform = pTempCartesianTransform.scaledBy(x: CGFloat(xScale), y: CGFloat(yScale));
-        
-        return pTempCartesianTransform
-    }
-    
-    func DrawMark(Mark markPoint:CGPoint, Color markColor : UIColor)
-    {
-        
         // Get the context
         let context = UIGraphicsGetCurrentContext()
-                
-        // Draw the arc around the circle
-        let rad = max(markCGSize.height, markCGSize.width)
-        context?.addArc(center: markPoint, radius: rad, startAngle: CGFloat(0), endAngle: CGFloat(2.0 * Double.pi), clockwise: true)
-                
         
+        let xyPlotPoint = DataPointToPlotPoint(Value: dataPoint)
+        let c = CGPoint(x: xyPlotPoint.x, y: xyPlotPoint.y)
+        // Draw the arc around the circle
+        context?.addArc(center: c, radius: plotDataMarkerSize, startAngle: CGFloat(0), endAngle: CGFloat(2.0 * Double.pi), clockwise: true)
+                
         // Set the fill color (if you are filling the circle)
-        context?.setFillColor(markColor.cgColor)
+        context?.setFillColor(xyPlotPoint.pointColor.cgColor)
         
         // Set the stroke color
         context?.setStrokeColor(UIColor.blue.cgColor)
         
         // Set the line width
-        context?.setLineWidth(CGFloat(markLineWidth))
+        context?.setLineWidth(CGFloat(plotDataMarkerLineWidth))
         
         // Draw the arc
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
         
     }
-    func DrawMark2()
-    {
-        let markColor = UIColor.blue
-        // 1
-        let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
-
-        // 2
-        let radius = max(bounds.width, bounds.height)
-
-        // 3
-        let startAngle: CGFloat = 0.0
-        let endAngle: CGFloat = .pi / 0.5
-
-        // 4
-        let path = UIBezierPath(
-          arcCenter: center,
-          radius: radius/10,
-          startAngle: startAngle,
-          endAngle: endAngle,
-          clockwise: true)
-
-        // 5
-        path.lineWidth = 10
-        markColor.setStroke()
-        path.stroke()
-        
-    }
-
-
+    
 }
+

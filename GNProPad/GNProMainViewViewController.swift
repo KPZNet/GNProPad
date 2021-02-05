@@ -21,19 +21,23 @@ class GNProMainViewViewController: UIViewController {
         
         var dataSetXY = XYDataSet()
         
-        gnScatterPlot.SetupScales(XMin: -50.0, XMax: 50.0, YMin: -100.0, YMax: 100.0)
+        let xm:Float = 50.0
+        let ym:Float = 50.0
+        gnScatterPlot.SetupScales(XMin: 0, XMax: CGFloat(xm), YMin: 0, YMax: CGFloat(ym))
         
         for _ in 1...100{
-            let randX = Float.random(in: 0...gnScatterPlot.xMax)
-            let randY = Float.random(in: 0...gnScatterPlot.yMax)
+            let randX = Float.random(in: 0...xm)
+            let randY = Float.random(in: 0...ym)
             let rBlue = Double.random(in: 0...255)
             let rGreen = Double.random(in: 0...255)
             let rRed = Double.random(in: 0...255)
-            let kolor:UIColor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.5)
+            let kolor:UIColor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.7)
+            
             let xy = XYData(x : randX, y:randY, color:kolor)
-            dataSetXY.dValues.append(xy)
+            dataSetXY.dataValues.append(xy)
             gnScatterPlot.AddDataSet(DataSet: dataSetXY)
         }
+    
         gnScatterPlot.TurnOnPlot()
     }
     
