@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GameplayKit
 
 class GNProMainViewViewController: UIViewController, UITableViewDataSource {
 
@@ -22,7 +23,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
         return 5
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")!
+         let cell = tableView.dequeueReusableCell(withIdentifier: "GNScatterCell")!
             
          cell.textLabel?.text = "Cell N"
             
@@ -38,34 +39,57 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
         
     }
     
-    fileprivate func PlotRandoScatter(Plot plt : GNScatterPlotView) {
-        var dataSetXY = XYDataSet()
+    fileprivate func GetNormal(_ low:Int, _ high:Int) -> Int{
+        let random = GKRandomSource()
+        let dice = GKGaussianDistribution(randomSource: random, lowestValue: low, highestValue: high)
+        return dice.nextInt()
+    }
+    
+    fileprivate func MakeDataSet( _ start:Int, _ end:Int, _ starty:Int, _ endy:Int, _ ssize:Float, _ label:String, _ plt:GNScatterPlotView) {
         
-        let xm:Float = 50.0
-        let ym:Float = 50.0
-        plt.SetupScales(XMin: 0, XMax: CGFloat(xm), YMin: 0, YMax: CGFloat(ym))
+        var dataSetXY = XYDataSet()
+        dataSetXY.plotLabel = label
+        
+        let rBlue = Double.random(in: 0...255)
+        let rGreen = Double.random(in: 0...255)
+        let rRed = Double.random(in: 0...255)
+        let kolor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.5)
         
         for _ in 1...100{
-            let randX = Float.random(in: 0...xm)
-            let randY = Float.random(in: 0...ym)
-            let rBlue = Double.random(in: 0...255)
-            let rGreen = Double.random(in: 0...255)
-            let rRed = Double.random(in: 0...255)
-            let kolor:UIColor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.7)
             
-            let xy = XYData(x : randX, y:randY, color:kolor)
+            let randX = GetNormal(start, end)
+            let randY = GetNormal(start,end)
+            
+            let xy = XYData(x : Float(randX), y: Float(randY), color:kolor, relSize: ssize)
             dataSetXY.dataValues.append(xy)
-            plt.AddDataSet(DataSet: dataSetXY)
         }
-        
-        plt.TurnOnPlot()
+        plt.AddDataSet(DataSet: dataSetXY)
     }
+    
     
     @IBAction func Drser(_ sender: AnyObject) {
         
-        PlotRandoScatter(Plot: gnScatterPlot)
-        PlotRandoScatter(Plot: gnScatterPlot2)
-        PlotRandoScatter(Plot: gnScatterPlot3)
+        gnScatterPlot.SetupScales(XMin: 0.0, XMax: 100.0, YMin: 0.0, YMax: 100.0)
+        MakeDataSet(0, 60, 10, 90, 1.0, "GN09", gnScatterPlot)
+        MakeDataSet(20, 70, 20, 70, 0.5, "GNBf-09", gnScatterPlot)
+        MakeDataSet(10, 50, 0, 100, 0.7, "SE-09-87", gnScatterPlot)
+        MakeDataSet(70, 100, 70, 100, 0.3, "BVO09-89", gnScatterPlot)
+        gnScatterPlot.TurnOnPlot()
+        
+        gnScatterPlot2.SetupScales(XMin: 0.0, XMax: 100.0, YMin: 0.0, YMax: 100.0)
+        MakeDataSet(50, 80, 80, 100, 1.0, "P-098", gnScatterPlot2)
+        MakeDataSet(20, 30, 10, 70, 0.5, "BM-7-6", gnScatterPlot2)
+        gnScatterPlot2.TurnOnPlot()
+        
+        
+        gnScatterPlot3.SetupScales(XMin: 0.0, XMax: 100.0, YMin: 0.0, YMax: 100.0)
+        MakeDataSet(0, 80, 10, 90, 1.0, "CB-9-65-8", gnScatterPlot3)
+        MakeDataSet(20, 50, 20, 50, 0.5, "WED-87", gnScatterPlot3)
+        MakeDataSet(10, 50, 0, 30, 0.7, "RT-9-5-3", gnScatterPlot3)
+        MakeDataSet(0, 100, 10, 100, 0.3, "BNMK-0", gnScatterPlot3)
+        MakeDataSet(90, 100, 90, 100, 1.2, "MKL-09-87", gnScatterPlot3)
+        gnScatterPlot3.TurnOnPlot()
+        
     }
     
     /*

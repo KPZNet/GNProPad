@@ -16,43 +16,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GNProPlot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voS-XX-Nsc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GNProPlot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voS-XX-Nsc">
                                 <rect key="frame" x="624" y="20" width="118" height="31.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0i-b2-VvX">
-                                <rect key="frame" x="20" y="20" width="71" height="64"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0i-b2-VvX">
+                                <rect key="frame" x="842" y="75" width="71" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="43"/>
                                 <state key="normal" title="Plot"/>
                                 <connections>
                                     <action selector="Drser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e28-RL-eUc"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxF-hz-gsS" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lxF-hz-gsS" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
                                 <rect key="frame" x="20" y="576" width="405" height="428"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yWs-if-PfX" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yWs-if-PfX" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
                                 <rect key="frame" x="433" y="576" width="401" height="427"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XS1-GU-TIs" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XS1-GU-TIs" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
                                 <rect key="frame" x="842" y="147" width="504" height="856"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7lW-ft-KLI">
-                                <rect key="frame" x="20" y="147" width="405" height="421"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7lW-ft-KLI">
+                                <rect key="frame" x="20" y="147" width="405" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReuseIdentifier" id="vFH-1R-z89">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GNScatterCell" id="QuA-N4-EX1">
                                         <rect key="frame" x="0.0" y="28" width="405" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vFH-1R-z89" id="H1F-gV-kqM">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QuA-N4-EX1" id="mha-lU-VnW">
                                             <rect key="frame" x="0.0" y="0.0" width="405" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" red="0.39667659761250906" green="0.62987642711577474" blue="0.81460492227979275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -61,27 +67,16 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="jlv-hH-B0r"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Genetically Modified Software" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hP9-XH-iMZ">
+                                <rect key="frame" x="20" y="60" width="814" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="47"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="voS-XX-Nsc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GdU-RX-EBx"/>
-                            <constraint firstItem="h0i-b2-VvX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Gr9-t2-iyA"/>
-                            <constraint firstItem="yWs-if-PfX" firstAttribute="bottom" secondItem="XS1-GU-TIs" secondAttribute="bottom" id="HQS-Yr-6Dn"/>
-                            <constraint firstItem="yWs-if-PfX" firstAttribute="leading" secondItem="lxF-hz-gsS" secondAttribute="trailing" constant="8" id="Img-mW-amo"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lxF-hz-gsS" secondAttribute="bottom" constant="20" id="NH1-lk-UCK"/>
-                            <constraint firstItem="XS1-GU-TIs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="147" id="OnG-2a-K1N"/>
-                            <constraint firstItem="yWs-if-PfX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="433" id="PMO-39-rAw"/>
-                            <constraint firstItem="lxF-hz-gsS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="576" id="Qqz-ho-2dc"/>
-                            <constraint firstItem="XS1-GU-TIs" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="RZG-NH-eEL"/>
-                            <constraint firstItem="lxF-hz-gsS" firstAttribute="centerY" secondItem="yWs-if-PfX" secondAttribute="centerY" id="blV-r0-SMr"/>
-                            <constraint firstItem="h0i-b2-VvX" firstAttribute="top" secondItem="voS-XX-Nsc" secondAttribute="top" id="fcY-Mv-xyS"/>
-                            <constraint firstItem="lxF-hz-gsS" firstAttribute="top" secondItem="yWs-if-PfX" secondAttribute="top" id="khS-mS-vgN"/>
-                            <constraint firstItem="h0i-b2-VvX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="lsw-CM-USq"/>
-                            <constraint firstItem="XS1-GU-TIs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="842" id="pUz-2r-Rzx"/>
-                            <constraint firstItem="h0i-b2-VvX" firstAttribute="leading" secondItem="lxF-hz-gsS" secondAttribute="leading" id="xtG-uK-PIY"/>
-                            <constraint firstItem="XS1-GU-TIs" firstAttribute="leading" secondItem="yWs-if-PfX" secondAttribute="trailing" constant="8" id="znt-8g-8ZX"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="gnScatterPlot" destination="lxF-hz-gsS" id="mga-7z-Jdy"/>

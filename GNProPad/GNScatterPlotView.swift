@@ -19,7 +19,7 @@ struct XYData {
         self.pointColor  = color
     }
 }
-struct XYPlotData {
+struct XYTranslatedPlotData {
     var x : CGFloat = 0.0
     var y : CGFloat = 0.0
     var pointColor : UIColor = UIColor.black
@@ -33,16 +33,17 @@ struct XYDataSet {
     var dataValues  = [XYData]()
     var xLabel : String = "X Label"
     var yLabel : String = "Y Label"
+    var plotLabel : String = "Plot Label"
 }
 
 class GNScatterPlotView: UIView {
 
     var drawPlot : Bool = false
-    var plotData = XYDataSet()
+    var plotData = [XYDataSet]()
     
     var xDataToPlotScale:CGFloat = 0.0
     var yDataToPlotScale:CGFloat = 0.0
-    
+
     var xDataMin:CGFloat = -5.0
     var yDataMin:CGFloat = -5.0
     var xDataMax:CGFloat = 5.0
@@ -65,13 +66,15 @@ class GNScatterPlotView: UIView {
     
     var plotMarginPercent:CGFloat = 0.04
     
+    var plotLabelTextSize = CGSize()
+    
     func AddDataSet( DataSet inDataSet:XYDataSet){
-        plotData = inDataSet
+        plotData.append(inDataSet)
     }
     
     override func draw(_ rect: CGRect)
     {
-        self.layer.sublayers = nil
+        //self.layer.sublayers = nil
         if(drawPlot)
         {
             DrawPlot()
@@ -87,11 +90,27 @@ class GNScatterPlotView: UIView {
     func DrawPlot()
     {
         DrawScales()
-        for p in plotData.dataValues{
-            DrawMark(DataPoint: p)
+        var i : Int = 0
+        for datSet in plotData{
+            
+            DrawDataSetLabel(datSet, i)
+            i = i + 1
+            
+            for p in datSet.dataValues{
+                DrawMark(DataPoint: p)
+            }
         }
+
     }
     
+    
+    func DrawDataSetLabel(_ dset:XYDataSet, _ row:Int)
+    {
+        let x = (bounds.width / 4.0)*3.3
+        let y = (bounds.height * 0.8) + ( plotLabelTextSize.height * CGFloat(row) )
+        let p = CGPoint(x: x, y: y)
+        DrawSeriesLabel(dset.plotLabel, p)
+    }
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -135,12 +154,14 @@ class GNScatterPlotView: UIView {
         
         plotDataMarkerLineWidth = plotDataMarkerSize * plotDataMarkerLineScaler
         axisLineWidth = smallAxis * plotAxisLineWidthScaler
-    
+        
+        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
+        plotLabelTextSize = textFont.sizeOfString( NSString(string: "XXX") )
     }
     
-    func DataPointToPlotPoint(Value val:XYData) -> XYPlotData{
+    func DataPointToPlotPoint(Value val:XYData) -> XYTranslatedPlotData{
         
-        var nValue = XYPlotData()
+        var nValue = XYTranslatedPlotData()
         nValue.x = ( CGFloat(val.x) - xDataMin) * xDataToPlotScale
         nValue.y = (((( CGFloat(val.y) - yDataMin) * yDataToPlotScale)) - bounds.size.height) * -1.0
         
@@ -183,5 +204,41 @@ class GNScatterPlotView: UIView {
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
     }
     
+    func DrawSeriesLabel(_ seriesLabel:String, _ loc:CGPoint )
+    {
+        var midPoint : CGPoint = CGPoint(x:0, y:0)
+        
+        midPoint.x = loc.x
+        midPoint.y = loc.y
+        
+        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
+        let textSize = textFont.sizeOfString( NSString(string: seriesLabel + "XX") )
+        
+        let sRect:CGRect = CGRect(x: midPoint.x, y: midPoint.y, width: textSize.width, height: textSize.height)
+        
+        let label = UILabel(frame: sRect)
+        //label.center = midPoint
+        label.font = textFont
+        label.textAlignment = NSTextAlignment.left
+        
+        label.text = seriesLabel
+        label.backgroundColor = UIColor.lightText
+        label.layer.borderColor = UIColor.darkGray.cgColor
+        label.layer.borderWidth = 0.5
+        label.layer.cornerRadius = 5
+        label.layer.masksToBounds = true
+        
+        addSubview(label)
+    }
+    
 }
 
+extension UIFont {
+    func sizeOfString (_ string: NSString) -> CGSize
+    {
+        return string.boundingRect(with: CGSize(width: Double.greatestFiniteMagnitude, height: Double.greatestFiniteMagnitude),
+                                   options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                   attributes: [NSAttributedString.Key.font: self],
+                                   context: nil).size
+    }
+}
