@@ -11,9 +11,11 @@ struct XYData {
     var x : Float = 0.0
     var y : Float = 0.0
     var pointColor : UIColor = UIColor.black
-    init(x: Float = 0.0, y: Float=0.0, color: UIColor = UIColor.black) {
+    var relativeSize:Float = 1.0
+    init(x: Float = 0.0, y: Float=0.0, color: UIColor = UIColor.black, relSize:Float=1.0) {
         self.x   = x
         self.y = y
+        self.relativeSize = relSize
         self.pointColor  = color
     }
 }
@@ -159,7 +161,9 @@ class GNScatterPlotView: UIView {
         
         context?.setStrokeColor(axisLineColor.cgColor)
         context?.setLineWidth(CGFloat(axisLineWidth))
-        context?.drawPath(using: CGPathDrawingMode.fillStroke)    }
+        context?.drawPath(using: CGPathDrawingMode.fillStroke)
+        
+    }
     
     func DrawMark(DataPoint dataPoint : XYData)
     {
@@ -167,7 +171,7 @@ class GNScatterPlotView: UIView {
         
         let xyPlotPoint = DataPointToPlotPoint(Value: dataPoint)
         let c = CGPoint(x: xyPlotPoint.x, y: xyPlotPoint.y)
-        context?.addArc(center: c, radius: plotDataMarkerSize, startAngle: CGFloat(0), endAngle: CGFloat(2.0 * Double.pi), clockwise: true)
+        context?.addArc(center: c, radius: plotDataMarkerSize * CGFloat(dataPoint.relativeSize), startAngle: CGFloat(0), endAngle: CGFloat(2.0 * Double.pi), clockwise: true)
                 
         context?.setFillColor(xyPlotPoint.pointColor.cgColor)
         context?.setStrokeColor(UIColor.blue.cgColor)

@@ -11,6 +11,7 @@ class GNProMainViewViewController: UIViewController {
 
     @IBOutlet weak var gnScatterPlot: GNScatterPlotView!
     @IBOutlet weak var gnScatterPlot2: GNScatterPlotView!
+    @IBOutlet weak var gnScatterPlot3: GNScatterPlotView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,7 @@ class GNProMainViewViewController: UIViewController {
         
         PlotRandoScatter(Plot: gnScatterPlot)
         PlotRandoScatter(Plot: gnScatterPlot2)
+        PlotRandoScatter(Plot: gnScatterPlot3)
     }
     
     /*
