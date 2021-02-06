@@ -89,10 +89,11 @@ class GNScatterPlotView: UIView {
     
     func DrawPlot()
     {
-        DrawScales()
+        DrawAxis()
         var i : Int = 0
         for datSet in plotData{
             
+            DrawPlotAxisLables(datSet)
             DrawDataSetLabel(datSet, i)
             i = i + 1
             
@@ -172,7 +173,19 @@ class GNScatterPlotView: UIView {
         return nValue
     }
     
-    func DrawScales(){
+    fileprivate func DrawPlotAxisLables(_ dataSet:XYDataSet) {
+        var xa = CGPoint()
+        xa.x = plotMargin/2.0
+        xa.y = bounds.height/2.0
+        DrawAxisLabel(dataSet.xLabel, xa, true)
+        
+        var ya = CGPoint()
+        ya.x = bounds.width/2.0
+        ya.y = bounds.height - (plotMargin/2.0)
+        DrawAxisLabel(dataSet.yLabel, ya, false)
+    }
+    
+    func DrawAxis(){
         let context = UIGraphicsGetCurrentContext()
         context?.move(to: CGPoint(x: plotMargin, y: plotMargin))
         context?.addLine(to: CGPoint(x: plotMargin, y: bounds.height - plotMargin))
@@ -204,7 +217,7 @@ class GNScatterPlotView: UIView {
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
     }
     
-    func DrawSeriesLabel(_ seriesLabel:String, _ loc:CGPoint )
+    func DrawSeriesLabel(_ seriesLabel:String, _ loc:CGPoint, _ rotate:Bool = false )
     {
         var midPoint : CGPoint = CGPoint(x:0, y:0)
         
@@ -227,6 +240,47 @@ class GNScatterPlotView: UIView {
         label.layer.borderWidth = 0.5
         label.layer.cornerRadius = 5
         label.layer.masksToBounds = true
+        
+        if(rotate)
+        {
+            var textRotation = CGFloat( .pi/2.0)
+            textRotation *= -1.0
+            label.transform = CGAffineTransform( rotationAngle: textRotation )
+        }
+        
+        addSubview(label)
+    }
+    
+    func DrawAxisLabel(_ seriesLabel:String, _ loc:CGPoint, _ rotate:Bool = false )
+    {
+        var midPoint : CGPoint = CGPoint(x:0, y:0)
+        
+        midPoint.x = loc.x
+        midPoint.y = loc.y
+        
+        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
+        let textSize = textFont.sizeOfString( NSString(string: seriesLabel + "XX") )
+        
+        let sRect:CGRect = CGRect(x: midPoint.x, y: midPoint.y, width: textSize.width, height: textSize.height)
+        
+        let label = UILabel(frame: sRect)
+        label.center = midPoint
+        label.font = textFont
+        label.textAlignment = NSTextAlignment.center
+        
+        label.text = seriesLabel
+        //label.backgroundColor = UIColor.lightText
+        //label.layer.borderColor = UIColor.darkGray.cgColor
+        //label.layer.borderWidth = 0.5
+        //label.layer.cornerRadius = 5
+        label.layer.masksToBounds = true
+        
+        if(rotate)
+        {
+            var textRotation = CGFloat( .pi/2.0)
+            textRotation *= -1.0
+            label.transform = CGAffineTransform( rotationAngle: textRotation )
+        }
         
         addSubview(label)
     }

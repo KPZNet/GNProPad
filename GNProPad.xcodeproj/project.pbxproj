@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		714BBA4E25CDBFC100D7DAAB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BBA4D25CDBFC100D7DAAB /* TableViewController.swift */; };
 		71623BFF25CB1FE8008460B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623BFE25CB1FE8008460B3 /* AppDelegate.swift */; };
 		71623C0125CB1FE8008460B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C0025CB1FE8008460B3 /* SceneDelegate.swift */; };
 		71623C0325CB1FE8008460B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C0225CB1FE8008460B3 /* ViewController.swift */; };
@@ -38,7 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		714BBA4D25CDBFC100D7DAAB /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		71623BFB25CB1FE8008460B3 /* GNProPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GNProPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71623BFE25CB1FE8008460B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71623C0025CB1FE8008460B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 				71623C0C25CB1FE9008460B3 /* Info.plist */,
 				71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */,
 				71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */,
-				714BBA4D25CDBFC100D7DAAB /* TableViewController.swift */,
 			);
 			path = GNProPad;
 			sourceTree = "<group>";
@@ -268,7 +265,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				71623C0325CB1FE8008460B3 /* ViewController.swift in Sources */,
-				714BBA4E25CDBFC100D7DAAB /* TableViewController.swift in Sources */,
 				71623C3A25CB48DF008460B3 /* GNScatterPlotView.swift in Sources */,
 				71623BFF25CB1FE8008460B3 /* AppDelegate.swift in Sources */,
 				71623C0125CB1FE8008460B3 /* SceneDelegate.swift in Sources */,

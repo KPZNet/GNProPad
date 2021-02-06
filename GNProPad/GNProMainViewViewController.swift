@@ -25,7 +25,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "GNScatterCell")!
             
-         cell.textLabel?.text = "Cell N"
+         cell.textLabel?.text = "Selection Cell N"
             
          return cell
     }
