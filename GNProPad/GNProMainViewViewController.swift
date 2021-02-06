@@ -8,7 +8,7 @@
 import UIKit
 import GameplayKit
 
-class GNProMainViewViewController: UIViewController, UITableViewDataSource {
+class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITableViewDelegate{
 
     @IBOutlet weak var gnScatterPlot: GNScatterPlotView!
     @IBOutlet weak var gnScatterPlot2: GNScatterPlotView!
@@ -30,6 +30,13 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
         cell.detailTextLabel?.text = String(format: "D %d", indexPath.row)
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        gnScatterPlot.ClearPlot()
+        gnScatterPlot2.ClearPlot()
+        gnScatterPlot3.ClearPlot()
+        SimulatePlot()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +70,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
         plt.AddDataSet(DataSet: dataSetXY)
     }
     
-    @IBAction func Drser(_ sender: AnyObject) {
-        
+    fileprivate func SimulatePlot() {
         gnScatterPlot.SetupScales(XMin: 0.0, XMax: 100.0, YMin: 0.0, YMax: 100.0)
         MakeDataSet(100,0, 60, 10, 90, 1.0, "GN09-00", gnScatterPlot)
         MakeDataSet(150,20, 70, 20, 70, 0.5, "GNBf-09", gnScatterPlot)
@@ -93,6 +99,11 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
         gnScatterPlot3.plotLabelX = "X: ZX-12-DF"
         gnScatterPlot3.plotLabelY = "Y: GGG-P_09-0"
         gnScatterPlot3.TurnOnPlot()
+    }
+    
+    @IBAction func Drser(_ sender: AnyObject) {
+        
+        SimulatePlot()
         
     }
     

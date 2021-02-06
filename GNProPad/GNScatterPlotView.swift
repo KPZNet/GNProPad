@@ -75,6 +75,12 @@ class GNScatterPlotView: UIView {
         plotData.append(inDataSet)
     }
     
+    func ClearPlot()
+    {
+        plotData = [XYDataSet]()
+        setNeedsDisplay()
+    }
+    
     override func draw(_ rect: CGRect)
     {
         self.layer.sublayers = nil
