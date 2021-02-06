@@ -77,7 +77,7 @@ class GNScatterPlotView: UIView {
     
     override func draw(_ rect: CGRect)
     {
-        //self.layer.sublayers = nil
+        self.layer.sublayers = nil
         if(drawPlot)
         {
             DrawPlot()
@@ -262,28 +262,19 @@ class GNScatterPlotView: UIView {
         
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
         let textSize = textFont.sizeOfString( NSString(string: seriesLabel + "XX") )
-        
         let sRect:CGRect = CGRect(x: midPoint.x, y: midPoint.y, width: textSize.width, height: textSize.height)
-        
         let label = UILabel(frame: sRect)
         label.center = midPoint
         label.font = textFont
         label.textAlignment = NSTextAlignment.center
-        
         label.text = seriesLabel
-        //label.backgroundColor = UIColor.lightText
-        //label.layer.borderColor = UIColor.darkGray.cgColor
-        //label.layer.borderWidth = 0.5
-        //label.layer.cornerRadius = 5
         label.layer.masksToBounds = true
-        
         if(rotate)
         {
             var textRotation = CGFloat( .pi/2.0)
             textRotation *= -1.0
             label.transform = CGAffineTransform( rotationAngle: textRotation )
         }
-        
         addSubview(label)
     }
     
