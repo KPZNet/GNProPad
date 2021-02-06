@@ -27,16 +27,15 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
             
         let c = String(format: "Selection Cell %d", indexPath.row)
         cell.textLabel?.text = c
+        cell.detailTextLabel?.text = String(format: "D %d", indexPath.row)
         return cell
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         //tableView.dataSource = self
-        
     }
     
     fileprivate func GetNormal(_ low:Int, _ high:Int) -> Int{
@@ -67,7 +66,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
     @IBAction func Drser(_ sender: AnyObject) {
         
         gnScatterPlot.SetupScales(XMin: 0.0, XMax: 100.0, YMin: 0.0, YMax: 100.0)
-        MakeDataSet(0, 60, 10, 90, 1.0, "GN09", gnScatterPlot)
+        MakeDataSet(0, 60, 10, 90, 1.0, "GN09-00", gnScatterPlot)
         MakeDataSet(20, 70, 20, 70, 0.5, "GNBf-09", gnScatterPlot)
         MakeDataSet(10, 50, 0, 100, 0.7, "SE-09-87", gnScatterPlot)
         MakeDataSet(10, 40, 60, 100, 0.3, "BVO09-89", gnScatterPlot)
