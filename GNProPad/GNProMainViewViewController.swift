@@ -60,7 +60,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
         for _ in 1...100{
             
             let randX = GetNormal(start, end)
-            let randY = GetNormal(start,end)
+            let randY = GetNormal(starty,endy)
             
             let xy = XYData(x : Float(randX), y: Float(randY), color:kolor, relSize: ssize)
             dataSetXY.dataValues.append(xy)
@@ -74,25 +74,27 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
         MakeDataSet(0, 60, 10, 90, 1.0, "GN09", gnScatterPlot)
         MakeDataSet(20, 70, 20, 70, 0.5, "GNBf-09", gnScatterPlot)
         MakeDataSet(10, 50, 0, 100, 0.7, "SE-09-87", gnScatterPlot)
-        MakeDataSet(70, 100, 70, 100, 0.3, "BVO09-89", gnScatterPlot)
+        MakeDataSet(10, 40, 60, 100, 0.3, "BVO09-89", gnScatterPlot)
+        MakeDataSet(5, 30, 50, 100, 0.8, "OP-00-89", gnScatterPlot)
         gnScatterPlot.plotLabelX = "Data CCF-098-23"
         gnScatterPlot.plotLabelY = "Range VBG-99800-098"
         gnScatterPlot.TurnOnPlot()
         
         gnScatterPlot2.SetupScales(XMin: 0.0, XMax: 100.0, YMin: 0.0, YMax: 100.0)
         MakeDataSet(50, 80, 80, 100, 1.0, "P-098", gnScatterPlot2)
-        MakeDataSet(20, 30, 10, 70, 0.5, "BM-7-6", gnScatterPlot2)
+        MakeDataSet(20, 70, 10, 70, 0.5, "BM-7-6", gnScatterPlot2)
         MakeDataSet(0, 80, 10, 70, 0.2, "CCFG-09-7", gnScatterPlot2)
+        MakeDataSet(20, 100, 10, 70, 0.3, "UIFG-049-R7", gnScatterPlot2)
         gnScatterPlot2.plotLabelX = "IND: XXD-223-0098-23"
         gnScatterPlot2.plotLabelY = "DEP: DDR-009"
         gnScatterPlot2.TurnOnPlot()
         
         gnScatterPlot3.SetupScales(XMin: 0.0, XMax: 100.0, YMin: 0.0, YMax: 100.0)
         MakeDataSet(0, 80, 10, 90, 1.0, "CB-9-65-8", gnScatterPlot3)
-        MakeDataSet(20, 50, 20, 50, 0.5, "WED-87", gnScatterPlot3)
+        MakeDataSet(20, 50, 20, 65, 0.5, "WED-87", gnScatterPlot3)
         MakeDataSet(10, 50, 0, 30, 0.7, "RT-9-5-3", gnScatterPlot3)
         MakeDataSet(0, 100, 10, 100, 0.3, "BNMK-0", gnScatterPlot3)
-        MakeDataSet(90, 100, 90, 100, 1.2, "MKL-09-87", gnScatterPlot3)
+        MakeDataSet(70, 100, 40, 100, 1.2, "MKL-09-87", gnScatterPlot3)
         gnScatterPlot3.plotLabelX = "X: ZX-12-DF"
         gnScatterPlot3.plotLabelY = "Y: GGG-P_09-0"
         gnScatterPlot3.TurnOnPlot()

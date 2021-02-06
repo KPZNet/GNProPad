@@ -107,7 +107,10 @@ class GNScatterPlotView: UIView {
     
     func DrawDataSetLabel(_ dset:XYDataSet, _ row:Int)
     {
-        let x = (bounds.width / 4.0)*3.3
+        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
+        let textSize = textFont.sizeOfString( NSString(string: "XXXXXXXXXXX") )
+        
+        let x = (bounds.width - textSize.width)
         let y = (bounds.height * 0.8) + ( plotLabelTextSize.height * CGFloat(row) )
         let p = CGPoint(x: x, y: y)
         DrawSeriesLabel(dset.plotLabel, p)
@@ -225,7 +228,7 @@ class GNScatterPlotView: UIView {
         midPoint.y = loc.y
         
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
-        let textSize = textFont.sizeOfString( NSString(string: seriesLabel + "XX") )
+        let textSize = textFont.sizeOfString( NSString(string: "XXXXXXXXXX") )
         
         let sRect:CGRect = CGRect(x: midPoint.x, y: midPoint.y, width: textSize.width, height: textSize.height)
         
