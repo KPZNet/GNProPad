@@ -109,7 +109,6 @@ class GNScatterPlotView: UIView {
     {
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
         let textSize = textFont.sizeOfString( NSString(string: "XXXXXXXXXXX") )
-        
         let x = (bounds.width - textSize.width)
         let y = (bounds.height * 0.8) + ( plotLabelTextSize.height * CGFloat(row) )
         let p = CGPoint(x: x, y: y)
