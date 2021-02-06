@@ -41,6 +41,9 @@ class GNScatterPlotView: UIView {
     var drawPlot : Bool = false
     var plotData = [XYDataSet]()
     
+    var plotLabelX : String = "Plot Label X"
+    var plotLabelY : String = "Plot Label Y"
+    
     var xDataToPlotScale:CGFloat = 0.0
     var yDataToPlotScale:CGFloat = 0.0
 
@@ -90,20 +93,17 @@ class GNScatterPlotView: UIView {
     func DrawPlot()
     {
         DrawAxis()
+        DrawPlotAxisLables()
         var i : Int = 0
         for datSet in plotData{
-            
-            DrawPlotAxisLables(datSet)
             DrawDataSetLabel(datSet, i)
             i = i + 1
-            
             for p in datSet.dataValues{
                 DrawMark(DataPoint: p)
             }
         }
 
     }
-    
     
     func DrawDataSetLabel(_ dset:XYDataSet, _ row:Int)
     {
@@ -173,16 +173,16 @@ class GNScatterPlotView: UIView {
         return nValue
     }
     
-    fileprivate func DrawPlotAxisLables(_ dataSet:XYDataSet) {
+    fileprivate func DrawPlotAxisLables() {
         var xa = CGPoint()
         xa.x = plotMargin/2.0
         xa.y = bounds.height/2.0
-        DrawAxisLabel(dataSet.xLabel, xa, true)
+        DrawAxisLabel(plotLabelY, xa, true)
         
         var ya = CGPoint()
         ya.x = bounds.width/2.0
         ya.y = bounds.height - (plotMargin/2.0)
-        DrawAxisLabel(dataSet.yLabel, ya, false)
+        DrawAxisLabel(plotLabelX, ya, false)
     }
     
     func DrawAxis(){
