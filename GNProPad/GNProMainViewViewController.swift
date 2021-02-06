@@ -27,9 +27,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
             
         let c = String(format: "Selection Cell %d", indexPath.row)
         cell.textLabel?.text = c
-        
-            
-         return cell
+        return cell
     }
     
     
@@ -58,10 +56,8 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource {
         let kolor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.5)
         
         for _ in 1...100{
-            
             let randX = GetNormal(start, end)
             let randY = GetNormal(starty,endy)
-            
             let xy = XYData(x : Float(randX), y: Float(randY), color:kolor, relSize: ssize)
             dataSetXY.dataValues.append(xy)
         }
