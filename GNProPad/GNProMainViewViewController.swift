@@ -61,6 +61,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
         let rRed = Double.random(in: 0...255)
         let kolor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.5)
         
+        dataSetXY.setColor = kolor
         for _ in 1...num{
             let randX = GetNormal(start, end)
             let randY = GetNormal(starty,endy)

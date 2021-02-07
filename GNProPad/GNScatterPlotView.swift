@@ -34,6 +34,7 @@ struct XYDataSet {
     var xLabel : String = "X Label"
     var yLabel : String = "Y Label"
     var plotLabel : String = "Plot Label"
+    var setColor = UIColor(cgColor: UIColor.black.cgColor)
 }
 
 class GNScatterPlotView: UIView {
@@ -118,7 +119,7 @@ class GNScatterPlotView: UIView {
         let x = (bounds.width - textSize.width)
         let y = (bounds.height * 0.8) + ( plotLabelTextSize.height * CGFloat(row) )
         let p = CGPoint(x: x, y: y)
-        DrawSeriesLabel(dset.plotLabel, p)
+        DrawSeriesLabel(dset.plotLabel, p, dset.setColor)
     }
     
     /*
@@ -225,7 +226,7 @@ class GNScatterPlotView: UIView {
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
     }
     
-    func DrawSeriesLabel(_ seriesLabel:String, _ loc:CGPoint, _ rotate:Bool = false )
+    func DrawSeriesLabel(_ seriesLabel:String, _ loc:CGPoint, _ col:UIColor, _ rotate:Bool = false )
     {
         var midPoint : CGPoint = CGPoint(x:0, y:0)
         
@@ -257,6 +258,8 @@ class GNScatterPlotView: UIView {
         }
         
         addSubview(label)
+        
+        DrawLabelSwatch(sRect, col)
     }
     
     func DrawAxisLabel(_ seriesLabel:String, _ loc:CGPoint, _ rotate:Bool = false )
@@ -283,6 +286,25 @@ class GNScatterPlotView: UIView {
         }
         addSubview(label)
     }
+    
+    func DrawLabelSwatch(_ loc:CGRect, _ col:UIColor)
+    {
+        
+        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
+        let textSize = textFont.sizeOfString( NSString(string: "X") )
+        let sRect:CGRect = CGRect(x: loc.minX - (2.0*textSize.width), y: loc.minY, width: textSize.height, height: textSize.height)
+        
+        let context = UIGraphicsGetCurrentContext()
+        
+        let c = CGPoint(x: sRect.midX, y: sRect.midY)
+        context?.addArc(center: c, radius: CGFloat(textSize.width/2.0), startAngle: CGFloat(0), endAngle: CGFloat(2.0 * Double.pi), clockwise: true)
+                
+        context?.setFillColor(col.cgColor)
+        context?.setStrokeColor(col.cgColor)
+        context?.setLineWidth(CGFloat(1))
+        context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
+    }
+    
     
 }
 
