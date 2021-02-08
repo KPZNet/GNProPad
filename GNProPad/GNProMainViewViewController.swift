@@ -16,6 +16,63 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+    // MARK: Handle Gesture detection
+    @objc func swipeGetstureDetected() {
+        //print("Swipe Gesture detected!!")
+    }
+
+    @objc func tapGetstureDetected() {
+        ReLoadSimulatedPlot()
+    }
+
+    @objc func pinchGetstureDetected() {
+       
+    }
+
+    @objc func longPressGetstureDetected() {
+        
+    }
+
+    @objc func doubleTapGestureDetected() {
+        
+    }
+
+    @objc func panGestureDetected() {
+        
+    }
+    
+    func addGestures()
+    {
+        // 1. Single Tap or Touch
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGetstureDetected))
+        tapGesture.numberOfTapsRequired = 1
+        gnScatterPlot3.addGestureRecognizer(tapGesture)
+
+        //2. Double Tap
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.doubleTapGestureDetected))
+        doubleTapGesture.numberOfTapsRequired = 2
+        view.addGestureRecognizer(doubleTapGesture)
+        gnScatterPlot3.addGestureRecognizer(doubleTapGesture)
+
+        //3. Swipe
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGetstureDetected))
+        gnScatterPlot3.addGestureRecognizer(swipeGesture)
+
+        //4. Pinch
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGetstureDetected))
+        gnScatterPlot3.addGestureRecognizer(pinchGesture)
+
+        //5. Long Press
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGetstureDetected))
+        gnScatterPlot3.addGestureRecognizer(longPressGesture)
+
+        //6. Pan
+        let panGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.panGestureDetected))
+        gnScatterPlot3.addGestureRecognizer(panGesture)
+
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -30,19 +87,25 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
         cell.detailTextLabel?.text = String(format: "D %d", indexPath.row)
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    fileprivate func ReLoadSimulatedPlot() {
         gnScatterPlot.ClearPlot()
         gnScatterPlot2.ClearPlot()
         gnScatterPlot3.ClearPlot()
         SimulatePlot()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ReLoadSimulatedPlot()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         //tableView.dataSource = self
+        
+        // Add tap gesture recognizer to view
+        addGestures()
     }
     
     fileprivate func GetNormal(_ low:Int, _ high:Int) -> Int{
