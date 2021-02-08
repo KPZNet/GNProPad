@@ -149,7 +149,10 @@ class GNScatterPlotView: UIView {
         xDataRange = abs(xDataMax - xDataMin)
         yDataRange = abs(yDataMax - yDataMin)
         
-        plotMargin = min(bounds.width * plotMarginPercent, bounds.height * plotMarginPercent)
+        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
+        plotLabelTextSize = textFont.sizeOfString( NSString(string: "XXX") )
+        
+        plotMargin = plotLabelTextSize.height * 1.5
         let plotMargin2 = plotMargin * 2.0
         
         xDataToPlotScale = (bounds.size.width - plotMargin2) / CGFloat(xDataRange)
@@ -164,9 +167,6 @@ class GNScatterPlotView: UIView {
         
         plotDataMarkerLineWidth = plotDataMarkerSize * plotDataMarkerLineScaler
         axisLineWidth = smallAxis * plotAxisLineWidthScaler
-        
-        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
-        plotLabelTextSize = textFont.sizeOfString( NSString(string: "XXX") )
     }
     
     func DataPointToPlotPoint(Value val:XYData) -> XYTranslatedPlotData{
