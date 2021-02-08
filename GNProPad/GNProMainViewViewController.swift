@@ -8,8 +8,10 @@
 import UIKit
 import GameplayKit
 
-class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITableViewDelegate{
+class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITableViewDelegate, UIScrollViewDelegate{
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var gnScatterPlot: GNScatterPlotView!
     @IBOutlet weak var gnScatterPlot2: GNScatterPlotView!
     @IBOutlet weak var gnScatterPlot3: GNScatterPlotView!
@@ -98,11 +100,17 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
         ReLoadSimulatedPlot()
     }
     
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        //return image
+        gnScatterPlot2
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        //tableView.dataSource = self
+        scrollView.delegate = self
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 10.0
         
         // Add tap gesture recognizer to view
         addGestures()
