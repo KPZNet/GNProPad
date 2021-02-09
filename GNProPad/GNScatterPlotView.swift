@@ -305,12 +305,6 @@ class GNScatterPlotView: UIView {
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
     }
     
-    
-
-    
-    
-    
-    
 }
 
 extension UIFont {
