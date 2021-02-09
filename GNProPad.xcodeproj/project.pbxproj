@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7134D52625D327A100F75AFF /* GNScatterPlotControllerBoxSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7134D52525D327A100F75AFF /* GNScatterPlotControllerBoxSelector.swift */; };
 		714B7EDF25D229C400851455 /* GNScatterPlotControllerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B7EDE25D229C400851455 /* GNScatterPlotControllerGestures.swift */; };
 		714B7EEC25D22E6100851455 /* GNScatterPlotControllerSelections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B7EEB25D22E6100851455 /* GNScatterPlotControllerSelections.swift */; };
 		714B7EF125D22F3700851455 /* GNProScatterPlotControllerPlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B7EF025D22F3700851455 /* GNProScatterPlotControllerPlots.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7134D52525D327A100F75AFF /* GNScatterPlotControllerBoxSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNScatterPlotControllerBoxSelector.swift; sourceTree = "<group>"; };
 		714B7EDE25D229C400851455 /* GNScatterPlotControllerGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNScatterPlotControllerGestures.swift; sourceTree = "<group>"; };
 		714B7EEB25D22E6100851455 /* GNScatterPlotControllerSelections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNScatterPlotControllerSelections.swift; sourceTree = "<group>"; };
 		714B7EF025D22F3700851455 /* GNProScatterPlotControllerPlots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNProScatterPlotControllerPlots.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				714B7EDE25D229C400851455 /* GNScatterPlotControllerGestures.swift */,
 				714B7EEB25D22E6100851455 /* GNScatterPlotControllerSelections.swift */,
 				714B7EF025D22F3700851455 /* GNProScatterPlotControllerPlots.swift */,
+				7134D52525D327A100F75AFF /* GNScatterPlotControllerBoxSelector.swift */,
 			);
 			path = GNProPad;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				71623C3A25CB48DF008460B3 /* GNScatterPlotView.swift in Sources */,
 				71623BFF25CB1FE8008460B3 /* AppDelegate.swift in Sources */,
 				71623C0125CB1FE8008460B3 /* SceneDelegate.swift in Sources */,
+				7134D52625D327A100F75AFF /* GNScatterPlotControllerBoxSelector.swift in Sources */,
 				714B7EEC25D22E6100851455 /* GNScatterPlotControllerSelections.swift in Sources */,
 				714B7EF125D22F3700851455 /* GNProScatterPlotControllerPlots.swift in Sources */,
 				714B7EDF25D229C400851455 /* GNScatterPlotControllerGestures.swift in Sources */,
