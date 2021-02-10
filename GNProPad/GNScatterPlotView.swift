@@ -19,16 +19,7 @@ struct XYData {
         self.pointColor  = color
     }
 }
-struct XYTranslatedPlotData {
-    var x : CGFloat = 0.0
-    var y : CGFloat = 0.0
-    var pointColor : UIColor = UIColor.black
-    init(x: CGFloat = 0.0, y: CGFloat=0.0, color: UIColor = UIColor.black) {
-        self.x   = x
-        self.y = y
-        self.pointColor  = color
-    }
-}
+
 struct XYDataSet {
     var dataValues  = [XYData]()
     var xLabel : String = "X Label"
@@ -169,16 +160,15 @@ class GNScatterPlotView: UIView {
         axisLineWidth = smallAxis * plotAxisLineWidthScaler
     }
     
-    func DataPointToPlotPoint(Value val:XYData) -> XYTranslatedPlotData{
+    fileprivate func DataPointToPlotPoint(Value val:XYData) -> CGPoint{
         
-        var nValue = XYTranslatedPlotData()
+        var nValue = CGPoint()
         nValue.x = ( CGFloat(val.x) - xDataMin) * xDataToPlotScale
         nValue.y = (((( CGFloat(val.y) - yDataMin) * yDataToPlotScale)) - bounds.size.height) * -1.0
         
         nValue.x += plotMargin
         nValue.y -= plotMargin
         
-        nValue.pointColor = val.pointColor
         return nValue
     }
     
@@ -220,7 +210,7 @@ class GNScatterPlotView: UIView {
         let c = CGPoint(x: xyPlotPoint.x, y: xyPlotPoint.y)
         context?.addArc(center: c, radius: plotDataMarkerSize * CGFloat(dataPoint.relativeSize), startAngle: CGFloat(0), endAngle: CGFloat(2.0 * Double.pi), clockwise: true)
                 
-        context?.setFillColor(xyPlotPoint.pointColor.cgColor)
+        context?.setFillColor(dataPoint.pointColor.cgColor)
         context?.setStrokeColor(UIColor.blue.cgColor)
         context?.setLineWidth(CGFloat(plotDataMarkerLineWidth))
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle

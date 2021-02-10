@@ -34,6 +34,16 @@ extension GNProMainViewViewController {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
+        /*
+        if let touch = touches.first
+        {
+            if touch.view == gnScatterPlot3
+            {
+                //let loc = touch.location(in: gnScatterPlot3)
+            }
+        }
+         */
+        
         //Save original tap Point
         if let touch = touches.first {
             lastPoint = touch.location(in: self.view)
