@@ -23,7 +23,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
     @IBOutlet weak var tableView: UITableView!
     
     
-
+    var plotData = XYGNDataSet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,16 +44,9 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
         
     }
     
-    
-    
-    
-    
-
-
     @IBAction func LoadFiler(_ sender: AnyObject) {
         
-        let tsvReader = TSVReader()
-        let dta = tsvReader.LoadResourceDemoFile(fileName: "Dfile", fileExt: "tsv")
+
     }
     
     

@@ -16,18 +16,21 @@ extension GNProMainViewViewController {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return Array(plotData.labels.keys).count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "GNScatterCell")!
             
-        let c = String(format: "Selection Cell %d", indexPath.row)
+        let labs = Array(plotData.labels.keys)
+        
+        let c = labs[indexPath.row]
         cell.textLabel?.text = c
         cell.detailTextLabel?.text = String(format: "D %d", indexPath.row)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         LoadPlotSimulations()
     }
     

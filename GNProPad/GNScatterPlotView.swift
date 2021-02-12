@@ -7,26 +7,7 @@
 
 import UIKit
 
-struct XYData {
-    var x : Float = 0.0
-    var y : Float = 0.0
-    var pointColor : UIColor = UIColor.black
-    var relativeSize:Float = 1.0
-    init(x: Float = 0.0, y: Float=0.0, color: UIColor = UIColor.black, relSize:Float=1.0) {
-        self.x = x
-        self.y = y
-        self.relativeSize = relSize
-        self.pointColor  = color
-    }
-}
 
-struct XYDataSet {
-    var dataValues  = [XYData]()
-    var xLabel : String = "X Label"
-    var yLabel : String = "Y Label"
-    var plotLabel : String = "Plot Label"
-    var setColor = UIColor(cgColor: UIColor.black.cgColor)
-}
 
 class XYGNData {
     var id : String
@@ -62,7 +43,7 @@ class XYGNDataSet {
 class GNScatterPlotView: UIView {
 
     var drawPlot : Bool = false
-    var plotData = [XYDataSet]()
+    var plotData = XYGNDataSet()
     
     var plotLabelX : String = "Plot Label X"
     var plotLabelY : String = "Plot Label Y"
@@ -94,13 +75,23 @@ class GNScatterPlotView: UIView {
     
     var plotLabelTextSize = CGSize()
     
-    func AddDataSet( DataSet inDataSet:XYDataSet){
-        plotData.append(inDataSet)
+    
+    func AddGNData( DataSet inDataSet:XYGNDataSet){
+        plotData = inDataSet
+        
+        let p = plotData
+        
+        let xmin = p.dataValues.min { a, b in a.x < b.x }
+        let xmax = p.dataValues.max { a, b in a.x < b.x }
+        let ymin = p.dataValues.min { a, b in a.y < b.y }
+        let ymax = p.dataValues.max { a, b in a.y < b.y }
+        
+        SetupScales(XMin: CGFloat(xmin?.x ?? 0.0), XMax: CGFloat(xmax?.x ?? 0.0), YMin: CGFloat(ymin?.y ?? 0.0), YMax: CGFloat(ymax?.y ?? 0.0))
     }
     
     func ClearPlot()
     {
-        plotData = [XYDataSet]()
+        plotData = XYGNDataSet()
         setNeedsDisplay()
     }
     
@@ -123,18 +114,22 @@ class GNScatterPlotView: UIView {
     {
         DrawAxis()
         DrawPlotAxisLables()
-        var i : Int = 0
-        for datSet in plotData{
-            DrawDataSetLabel(datSet, i)
-            i = i + 1
-            for p in datSet.dataValues{
-                DrawMark(DataPoint: p)
-            }
+        
+        for p in plotData.dataValues{
+            p.pointColor = plotData.subTypes[p.subType] ?? UIColor.black
+            DrawMark(DataPoint: p)
+        }
+        
+        var j : Int = 0
+        for subt in plotData.subTypes
+        {
+            DrawDataSetSubTypeLabel(subt.key, subt.value, j)
+            j = j + 1
         }
 
     }
     
-    func DrawDataSetLabel(_ dset:XYDataSet, _ row:Int)
+    func DrawDataSetLabel(_ dset:XYGNDataSet, _ row:Int)
     {
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
         let textSize = textFont.sizeOfString( NSString(string: "XXXXXXXXXXX") )
@@ -143,6 +138,17 @@ class GNScatterPlotView: UIView {
         let p = CGPoint(x: x, y: y)
         DrawSeriesLabel(dset.plotLabel, p, dset.setColor)
     }
+    
+    func DrawDataSetSubTypeLabel(_ dset:String, _ col:UIColor, _ row:Int)
+    {
+        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
+        let textSize = textFont.sizeOfString( NSString(string: "XXXXXXXXXXX") )
+        let x = (bounds.width - textSize.width)
+        let y = (bounds.height * 0.0) + ( plotLabelTextSize.height * CGFloat(row) )
+        let p = CGPoint(x: x, y: y)
+        DrawSeriesLabel(dset, p, col)
+    }
+    
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -191,7 +197,7 @@ class GNScatterPlotView: UIView {
         axisLineWidth = smallAxis * plotAxisLineWidthScaler
     }
     
-    fileprivate func DataPointToPlotPoint(Value val:XYData) -> CGPoint{
+    fileprivate func DataPointToPlotPoint(Value val:XYGNData) -> CGPoint{
         
         var nValue = CGPoint()
         nValue.x = ( CGFloat(val.x) - xDataMin) * xDataToPlotScale
@@ -233,7 +239,7 @@ class GNScatterPlotView: UIView {
         
     }
     
-    func DrawMark(DataPoint dataPoint : XYData)
+    func DrawMark(DataPoint dataPoint : XYGNData)
     {
         let context = UIGraphicsGetCurrentContext()
         
