@@ -50,7 +50,7 @@ class XYGNData {
 
 class XYGNDataSet {
     var dataValues  = [XYGNData]()
-    var labels = [String]()
+    var labels = [String:UIColor]()
     var subTypes = [String:UIColor]()
     var xLabel : String = "X Label"
     var yLabel : String = "Y Label"

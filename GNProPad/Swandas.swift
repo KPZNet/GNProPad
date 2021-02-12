@@ -30,7 +30,10 @@ class TSVReader {
                 let data = cleanRows(file: fileContents)
                 let csvRows = csv(data: data)
                 let labelRow = csvRows[0]
-                dataSetXY.labels = Array(labelRow[5 ..< labelRow.count])
+                
+                for k in 5 ..< labelRow.count{
+                    dataSetXY.labels.updateValue(RandomColor(), forKey: labelRow[k])
+                }
             
                 for i in 1 ..< csvRows.count
                 {
@@ -49,7 +52,7 @@ class TSVReader {
                     dataSetXY.subTypes.updateValue(RandomColor(), forKey: _subType)
                     
                     var labelDict = [String:Float]()
-                    for j in 0 ..< dataSetXY.labels.count
+                    for j in 5 ..< labelRow.count
                     {
                         let r_j = r[j]
                         let r_j_label = labelRow[j]
