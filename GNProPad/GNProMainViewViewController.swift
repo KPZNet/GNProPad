@@ -53,7 +53,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
     @IBAction func LoadFiler(_ sender: AnyObject) {
         
         let tsvReader = TSVReader()
-        tsvReader.LoadResourceDemoFile(fileName: "Dfile", fileExt: "tsv")
+        let dta = tsvReader.LoadResourceDemoFile(fileName: "Dfile", fileExt: "tsv")
     }
     
     
