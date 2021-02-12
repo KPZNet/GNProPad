@@ -11,6 +11,7 @@
 		714B7EDF25D229C400851455 /* GNScatterPlotControllerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B7EDE25D229C400851455 /* GNScatterPlotControllerGestures.swift */; };
 		714B7EEC25D22E6100851455 /* GNScatterPlotControllerSelections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B7EEB25D22E6100851455 /* GNScatterPlotControllerSelections.swift */; };
 		714B7EF125D22F3700851455 /* GNProScatterPlotControllerPlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B7EF025D22F3700851455 /* GNProScatterPlotControllerPlots.swift */; };
+		7153B1F325D5C306009ACF0F /* Dfile.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 7153B1F225D5C306009ACF0F /* Dfile.tsv */; };
 		71623BFF25CB1FE8008460B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623BFE25CB1FE8008460B3 /* AppDelegate.swift */; };
 		71623C0125CB1FE8008460B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C0025CB1FE8008460B3 /* SceneDelegate.swift */; };
 		71623C0625CB1FE8008460B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71623C0425CB1FE8008460B3 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 		71623C2125CB1FE9008460B3 /* GNProPadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C2025CB1FE9008460B3 /* GNProPadUITests.swift */; };
 		71623C3A25CB48DF008460B3 /* GNScatterPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */; };
 		71623C3F25CB5D54008460B3 /* GNProMainViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */; };
+		71AC886025D4DBFE00D5D6F1 /* Swandas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC885F25D4DBFE00D5D6F1 /* Swandas.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,7 @@
 		714B7EDE25D229C400851455 /* GNScatterPlotControllerGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNScatterPlotControllerGestures.swift; sourceTree = "<group>"; };
 		714B7EEB25D22E6100851455 /* GNScatterPlotControllerSelections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNScatterPlotControllerSelections.swift; sourceTree = "<group>"; };
 		714B7EF025D22F3700851455 /* GNProScatterPlotControllerPlots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNProScatterPlotControllerPlots.swift; sourceTree = "<group>"; };
+		7153B1F225D5C306009ACF0F /* Dfile.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Dfile.tsv; sourceTree = "<group>"; };
 		71623BFB25CB1FE8008460B3 /* GNProPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GNProPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71623BFE25CB1FE8008460B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71623C0025CB1FE8008460B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		71623C2225CB1FE9008460B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNScatterPlotView.swift; sourceTree = "<group>"; };
 		71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNProMainViewViewController.swift; sourceTree = "<group>"; };
+		71AC885F25D4DBFE00D5D6F1 /* Swandas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swandas.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 		71623BFD25CB1FE8008460B3 /* GNProPad */ = {
 			isa = PBXGroup;
 			children = (
+				7153B1F225D5C306009ACF0F /* Dfile.tsv */,
 				71623BFE25CB1FE8008460B3 /* AppDelegate.swift */,
 				71623C0025CB1FE8008460B3 /* SceneDelegate.swift */,
 				71623C0425CB1FE8008460B3 /* Main.storyboard */,
@@ -116,6 +121,7 @@
 				71623C0925CB1FE9008460B3 /* LaunchScreen.storyboard */,
 				71623C0C25CB1FE9008460B3 /* Info.plist */,
 				71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */,
+				71AC885F25D4DBFE00D5D6F1 /* Swandas.swift */,
 				71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */,
 				714B7EDE25D229C400851455 /* GNScatterPlotControllerGestures.swift */,
 				714B7EEB25D22E6100851455 /* GNScatterPlotControllerSelections.swift */,
@@ -246,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7153B1F325D5C306009ACF0F /* Dfile.tsv in Resources */,
 				71623C0B25CB1FE9008460B3 /* LaunchScreen.storyboard in Resources */,
 				71623C0825CB1FE9008460B3 /* Assets.xcassets in Resources */,
 				71623C0625CB1FE8008460B3 /* Main.storyboard in Resources */,
@@ -274,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71623C3A25CB48DF008460B3 /* GNScatterPlotView.swift in Sources */,
+				71AC886025D4DBFE00D5D6F1 /* Swandas.swift in Sources */,
 				71623BFF25CB1FE8008460B3 /* AppDelegate.swift in Sources */,
 				71623C0125CB1FE8008460B3 /* SceneDelegate.swift in Sources */,
 				7134D52625D327A100F75AFF /* GNScatterPlotControllerBoxSelector.swift in Sources */,

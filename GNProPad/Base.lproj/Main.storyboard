@@ -98,6 +98,14 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="Uf0-I8-8Za"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="kdf-9s-ZM6"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bIh-ms-ju8">
+                                <rect key="frame" x="447" y="147" width="157" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Load File"/>
+                                <connections>
+                                    <action selector="LoadFiler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ofD-3L-DD2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

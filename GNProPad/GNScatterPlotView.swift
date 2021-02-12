@@ -13,7 +13,7 @@ struct XYData {
     var pointColor : UIColor = UIColor.black
     var relativeSize:Float = 1.0
     init(x: Float = 0.0, y: Float=0.0, color: UIColor = UIColor.black, relSize:Float=1.0) {
-        self.x   = x
+        self.x = x
         self.y = y
         self.relativeSize = relSize
         self.pointColor  = color
@@ -27,6 +27,37 @@ struct XYDataSet {
     var plotLabel : String = "Plot Label"
     var setColor = UIColor(cgColor: UIColor.black.cgColor)
 }
+
+class XYGNData {
+    var id : String
+    var nameID : String
+    var subType : String
+    var labels : [String:Float]
+    var x : Float = 0.0
+    var y : Float = 0.0
+    var pointColor : UIColor = UIColor.black
+    var relativeSize:Float = 1.0
+    init(X: Float = 0.0, Y: Float=0.0, ID:String, NameID:String, SubType:String, Labels:[String:Float])
+    {
+        self.x = X
+        self.y = Y
+        self.id = ID
+        self.nameID = NameID
+        self.subType = SubType
+        self.labels = Labels
+    }
+}
+
+class XYGNDataSet {
+    var dataValues  = [XYGNData]()
+    var labels = [String]()
+    var subTypes = [String:UIColor]()
+    var xLabel : String = "X Label"
+    var yLabel : String = "Y Label"
+    var plotLabel : String = "Plot Label"
+    var setColor = UIColor(cgColor: UIColor.black.cgColor)
+}
+
 
 class GNScatterPlotView: UIView {
 
