@@ -31,7 +31,10 @@ extension GNProMainViewViewController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        LoadPlotSimulations()
+        //let labs = Array(plotData.labels.keys)
+        let lab = Array(plotData.labels)[indexPath.row].key
+        let col = Array(plotData.labels)[indexPath.row].value
+        
     }
     
 }
