@@ -16,7 +16,7 @@ class TSVReader {
         let rBlue = Double.random(in: 0...255)
         let rGreen = Double.random(in: 0...255)
         let rRed = Double.random(in: 0...255)
-        let kolor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.9)
+        let kolor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 1.0)
         return kolor
     }
     

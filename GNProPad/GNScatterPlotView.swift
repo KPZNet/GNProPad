@@ -144,14 +144,14 @@ class GNScatterPlotView: UIView {
     {
         DrawAxis()
         
+        plotData.dataValues.sort { $0.labels[plotData.labelSelected] ?? 0.0 <            $1.labels[plotData.labelSelected] ?? 0.0 }
+        
+        
         for p in plotData.dataValues{
-            
-            
             let lVal = p.labels[plotData.labelSelected] ?? 0.0
-            
             let v = ScaleLabelToColor(num: lVal, lmin: plotData.labelMin, lmax: plotData.labelMax)
-            
-            let col = UIColor(red: CGFloat((v/255.0)), green: CGFloat((v/255.0)), blue: CGFloat((0/255.0)), alpha: 1.0)
+
+            let col = UIColor(red: CGFloat((v/255.0)), green: CGFloat((v/255.0)), blue: CGFloat((0/255.0)), alpha: 0.8)
             
             p.pointColor = col
             DrawMark(DataPoint: p)

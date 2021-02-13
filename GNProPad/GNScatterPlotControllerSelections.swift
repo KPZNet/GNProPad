@@ -18,6 +18,7 @@ extension GNProMainViewViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Array(plotData.labels.keys).count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "GNScatterCell")!
             
