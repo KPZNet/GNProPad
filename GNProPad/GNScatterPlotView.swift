@@ -46,6 +46,7 @@ enum PLOT_TYPE {
     case label_type
     case sub_type
     case no_type
+    case label_type_not_selected
 }
 
 
@@ -86,8 +87,12 @@ class GNScatterPlotView: UIView {
     var plotLabelTextSize = CGSize()
     
     
-    func AddGNData( DataSet inDataSet:XYGNDataSet){
+    func SetPlotData( DataSet inDataSet:XYGNDataSet, plotFormat:PLOT_TYPE)
+    {
+        ClearPlot()
+        
         plotData = inDataSet
+        plotType = plotFormat
         
         let p = plotData
         
@@ -97,6 +102,15 @@ class GNScatterPlotView: UIView {
         let ymax = p.dataValues.max { a, b in a.y < b.y }
         
         SetupScales(XMin: CGFloat(xmin?.x ?? 0.0), XMax: CGFloat(xmax?.x ?? 0.0), YMin: CGFloat(ymin?.y ?? 0.0), YMax: CGFloat(ymax?.y ?? 0.0))
+        
+        setNeedsDisplay()
+    }
+    
+    func SetPlotData( resourceFile:String, resourceFileExt:String, plotFormat:PLOT_TYPE)
+    {
+        let tsvReader = TSVReader()
+        plotData = tsvReader.GetDataSetFromBundleResource(fileName: "Dfile", fileExt: "tsv")
+        SetPlotData(DataSet: plotData, plotFormat: plotFormat)
     }
     
     func ClearPlot()
@@ -115,6 +129,11 @@ class GNScatterPlotView: UIView {
         if plotType == PLOT_TYPE.label_type
         {
             DrawPlotLabel()
+        }
+        if plotType == PLOT_TYPE.label_type_not_selected
+        {
+            DrawPlotLabelNotSelected()
+            
         }
     }
     
@@ -144,19 +163,28 @@ class GNScatterPlotView: UIView {
     {
         DrawAxis()
         
-        let pSorted = plotData.dataValues.sorted { $0.labels[plotData.labelSelected] ?? 0.0 <            $1.labels[plotData.labelSelected] ?? 0.0 }
-        
-        
+        let pSorted = plotData.dataValues.sorted { $0.labels[plotData.labelSelected] ?? 0.0 < $1.labels[plotData.labelSelected] ?? 0.0 }
         for p in pSorted{
             let lVal = p.labels[plotData.labelSelected] ?? 0.0
             let v = ScaleLabelToColor(num: lVal, lmin: plotData.labelMin, lmax: plotData.labelMax)
-
             let col = UIColor(red: CGFloat((v/255.0)), green: CGFloat((v/255.0)), blue: CGFloat((0/255.0)), alpha: 0.8)
-            
             p.pointColor = col
             DrawMark(DataPoint: p)
         }
         DrawColorGradientAxis()
+    }
+    
+    func DrawPlotLabelNotSelected()
+    {
+        DrawAxis()
+        
+        let pSorted = plotData.dataValues.sorted { $0.labels[plotData.labelSelected] ?? 0.0 < $1.labels[plotData.labelSelected] ?? 0.0 }
+        for p in pSorted{
+            let col = UIColor.clear
+            p.pointColor = col
+            DrawMark(DataPoint: p)
+        }
+        //DrawColorGradientAxis()
     }
     
     func DrawDataSetLabel(_ dset:XYGNDataSet, _ row:Int)
@@ -188,23 +216,14 @@ class GNScatterPlotView: UIView {
 
         gradient.frame = view.bounds
         
-        let start = UIColor(red: CGFloat((255/255.0)), green: CGFloat((255/255.0)), blue: CGFloat((0/255.0)), alpha: 1.0)
+        let sstart = UIColor(red: CGFloat((255/255.0)), green: CGFloat((255/255.0)), blue: CGFloat((0/255.0)), alpha: 1.0)
         let send = UIColor(red: CGFloat((0/255.0)), green: CGFloat((0/255.0)), blue: CGFloat((0/255.0)), alpha: 1.0)
         //gradient.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor]
-        gradient.colors = [start.cgColor, send.cgColor]
+        gradient.colors = [sstart.cgColor, send.cgColor]
 
         view.layer.insertSublayer(gradient, at: 0)
         addSubview(view)        
     }
-    
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     
 
     override init(frame aRect: CGRect)
@@ -298,7 +317,7 @@ class GNScatterPlotView: UIView {
         context?.addArc(center: c, radius: plotDataMarkerSize * CGFloat(dataPoint.relativeSize), startAngle: CGFloat(0), endAngle: CGFloat(2.0 * Double.pi), clockwise: true)
                 
         context?.setFillColor(dataPoint.pointColor.cgColor)
-        context?.setStrokeColor(UIColor.blue.cgColor)
+        context?.setStrokeColor(UIColor.gray.cgColor)
         context?.setLineWidth(CGFloat(plotDataMarkerLineWidth))
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
     }
@@ -335,7 +354,6 @@ class GNScatterPlotView: UIView {
         }
         
         addSubview(label)
-        
         DrawLabelSwatch(sRect, col)
     }
     
@@ -387,23 +405,16 @@ class GNScatterPlotView: UIView {
         return ( (num - lmin) / abs(lmin - lmax) ) * 255.0
     }
     
-    func PlotLabel(label:String)
+    func SelectGeneLabel(label:String)
     {
         let xmin = plotData.dataValues.min { a, b in a.labels[label] ?? 0.0 < b.labels[label] ?? 0.0 }
         let xmax = plotData.dataValues.max { a, b in a.labels[label] ?? 0.0 < b.labels[label] ?? 0.0 }
         plotData.labelMin = xmin?.labels[label] ?? 0.0
         plotData.labelMax = xmax?.labels[label] ?? 0.0
         plotData.labelSelected = label
+        TurnOnPlot(inType: PLOT_TYPE.label_type)
+        
     }
     
 }
 
-extension UIFont {
-    func sizeOfString (_ string: NSString) -> CGSize
-    {
-        return string.boundingRect(with: CGSize(width: Double.greatestFiniteMagnitude, height: Double.greatestFiniteMagnitude),
-                                   options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                                   attributes: [NSAttributedString.Key.font: self],
-                                   context: nil).size
-    }
-}

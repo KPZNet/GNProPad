@@ -37,15 +37,13 @@ extension GNProMainViewViewController {
         {
             let lab = Array(plotData.labels)[indexPath.row].key
             _ = Array(plotData.labels)[indexPath.row].value
-            plotA.PlotLabel(label: lab)
-            plotA.TurnOnPlot(inType: PLOT_TYPE.label_type)
+            plotA.SelectGeneLabel(label: lab)
         }
         if tableViewW == tableViewB
         {
             let lab = Array(plotData.labels)[indexPath.row].key
             _ = Array(plotData.labels)[indexPath.row].value
-            plotB.PlotLabel(label: lab)
-            plotB.TurnOnPlot(inType: PLOT_TYPE.label_type)
+            plotB.SelectGeneLabel(label: lab)
         }
         
     }

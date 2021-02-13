@@ -20,7 +20,7 @@ class TSVReader {
         return kolor
     }
     
-    func GetGNXYDataSetFromFile(fileName : String, fileExt:String) ->XYGNDataSet
+    func GetDataSetFromBundleResource(fileName : String, fileExt:String) ->XYGNDataSet
     {
         let dataSetXY = XYGNDataSet()
         if let url = Bundle.main.url(forResource: fileName, withExtension: fileExt)
@@ -37,7 +37,6 @@ class TSVReader {
                 for i in 1 ..< csvRows.count
                 {
                     let r = csvRows[i]
-                    
                     if r.count < labelRow.count {
                         break
                     }
@@ -81,8 +80,14 @@ class TSVReader {
         }
         return result
     }
-
-
     
 }
-
+extension UIFont {
+    func sizeOfString (_ string: NSString) -> CGSize
+    {
+        return string.boundingRect(with: CGSize(width: Double.greatestFiniteMagnitude, height: Double.greatestFiniteMagnitude),
+                                   options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                   attributes: [NSAttributedString.Key.font: self],
+                                   context: nil).size
+    }
+}

@@ -19,27 +19,23 @@ extension GNProMainViewViewController {
     }
     
     func LoadPlotSimulations() {
-        plotA.ClearPlot()
-        plotB.ClearPlot()
-        plotC.ClearPlot()
+
         SimulatePlot()
     }
     
-    
-    func SimulatePlot() {
-        
+    func SimulatePlot()
+    {
+                
         let tsvReader = TSVReader()
-        plotData = tsvReader.GetGNXYDataSetFromFile(fileName: "Dfile", fileExt: "tsv")
+        plotData = tsvReader.GetDataSetFromBundleResource(fileName: "Dfile", fileExt: "tsv")
         
+        plotA.SetPlotData(DataSet: plotData,plotFormat: PLOT_TYPE.label_type_not_selected)
+        plotB.SetPlotData(DataSet: plotData,plotFormat: PLOT_TYPE.label_type_not_selected)
+        plotC.SetPlotData(DataSet: plotData,plotFormat: PLOT_TYPE.sub_type)
+
         self.tableViewA.reloadData()
         self.tableViewB.reloadData()
         
-        plotA.AddGNData(DataSet: plotData)
-        plotB.AddGNData(DataSet: plotData)
-        plotC.AddGNData(DataSet: plotData)
-        
-        
-        plotC.TurnOnPlot(inType: PLOT_TYPE.sub_type)
     }
     
     

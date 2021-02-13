@@ -39,7 +39,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
         SetupSelectionBox()
     }
     
-    @IBAction func Drser(_ sender: AnyObject) {
+    @IBAction func PlotCellScatter(_ sender: AnyObject) {
         
         SimulatePlot()
         
