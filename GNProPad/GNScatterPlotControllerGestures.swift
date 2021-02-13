@@ -15,9 +15,8 @@ extension GNProMainViewViewController {
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         //return image
-        gnScatterPlot2
+        plotB
     }
-    
 
     // MARK: Handle Gesture detection
     @objc func swipeGetstureDetected() {
@@ -49,29 +48,29 @@ extension GNProMainViewViewController {
         // 1. Single Tap or Touch
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGetstureDetected))
         tapGesture.numberOfTapsRequired = 1
-        gnScatterPlot3.addGestureRecognizer(tapGesture)
+        plotC.addGestureRecognizer(tapGesture)
 
         //2. Double Tap
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.doubleTapGestureDetected))
         doubleTapGesture.numberOfTapsRequired = 2
         view.addGestureRecognizer(doubleTapGesture)
-        gnScatterPlot3.addGestureRecognizer(doubleTapGesture)
+        plotC.addGestureRecognizer(doubleTapGesture)
 
         //3. Swipe
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGetstureDetected))
-        gnScatterPlot3.addGestureRecognizer(swipeGesture)
+        plotC.addGestureRecognizer(swipeGesture)
 
         //4. Pinch
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGetstureDetected))
-        gnScatterPlot3.addGestureRecognizer(pinchGesture)
+        plotC.addGestureRecognizer(pinchGesture)
 
         //5. Long Press
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGetstureDetected))
-        gnScatterPlot3.addGestureRecognizer(longPressGesture)
+        plotC.addGestureRecognizer(longPressGesture)
 
         //6. Pan
         let panGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.panGestureDetected))
-        gnScatterPlot3.addGestureRecognizer(panGesture)
+        plotC.addGestureRecognizer(panGesture)
 
     }
     

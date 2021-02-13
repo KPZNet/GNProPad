@@ -19,9 +19,9 @@ extension GNProMainViewViewController {
     }
     
     func LoadPlotSimulations() {
-        gnScatterPlot.ClearPlot()
-        gnScatterPlot2.ClearPlot()
-        gnScatterPlot3.ClearPlot()
+        plotA.ClearPlot()
+        plotB.ClearPlot()
+        plotC.ClearPlot()
         SimulatePlot()
     }
     
@@ -29,27 +29,28 @@ extension GNProMainViewViewController {
     func SimulatePlot() {
         
         let tsvReader = TSVReader()
-        plotData = tsvReader.LoadResourceDemoFile(fileName: "Dfile", fileExt: "tsv")
+        plotData = tsvReader.GetGNXYDataSetFromFile(fileName: "Dfile", fileExt: "tsv")
         
         self.tableView.reloadData()
+        self.tableViewB.reloadData()
         
-        gnScatterPlot.AddGNData(DataSet: plotData)
-        gnScatterPlot2.AddGNData(DataSet: plotData)
-        gnScatterPlot3.AddGNData(DataSet: plotData)
+        plotA.AddGNData(DataSet: plotData)
+        plotB.AddGNData(DataSet: plotData)
+        plotC.AddGNData(DataSet: plotData)
         
-        gnScatterPlot.plotLabelX = "Data CCF-098-23"
-        gnScatterPlot.plotLabelY = "Range VBG-99800-098"
-        gnScatterPlot.TurnOnPlot()
-        
-        
-        gnScatterPlot2.plotLabelX = "IND: XXD-223-0098-23"
-        gnScatterPlot2.plotLabelY = "DEP: DDR-009"
-        gnScatterPlot2.TurnOnPlot()
+        plotA.plotLabelX = "Data CCF-098-23"
+        plotA.plotLabelY = "Range VBG-99800-098"
+        plotA.TurnOnPlot()
         
         
-        gnScatterPlot3.plotLabelX = "X: ZX-12-DF"
-        gnScatterPlot3.plotLabelY = "Y: GGG-P_09-0"
-        gnScatterPlot3.TurnOnPlot()
+        plotB.plotLabelX = "IND: XXD-223-0098-23"
+        plotB.plotLabelY = "DEP: DDR-009"
+        plotB.TurnOnPlot()
+        
+        
+        plotC.plotLabelX = "X: ZX-12-DF"
+        plotC.plotLabelY = "Y: GGG-P_09-0"
+        plotC.TurnOnPlot()
     }
     
     

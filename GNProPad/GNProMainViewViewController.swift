@@ -16,11 +16,12 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var gnScatterPlot: GNScatterPlotView!
-    @IBOutlet weak var gnScatterPlot2: GNScatterPlotView!
-    @IBOutlet weak var gnScatterPlot3: GNScatterPlotView!
+    @IBOutlet weak var plotA: GNScatterPlotView!
+    @IBOutlet weak var plotB: GNScatterPlotView!
+    @IBOutlet weak var plotC: GNScatterPlotView!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewB: UITableView!
     
     
     var plotData = XYGNDataSet()
@@ -28,9 +29,9 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scrollView.delegate = self
-        scrollView.minimumZoomScale = 1.0
-        scrollView.maximumZoomScale = 10.0
+        //scrollView.delegate = self
+        //scrollView.minimumZoomScale = 1.0
+        //scrollView.maximumZoomScale = 10.0
         
         // Add tap gesture recognizer to view
         addGestures()

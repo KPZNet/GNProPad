@@ -16,25 +16,24 @@ class TSVReader {
         let rBlue = Double.random(in: 0...255)
         let rGreen = Double.random(in: 0...255)
         let rRed = Double.random(in: 0...255)
-        let kolor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.5)
+        let kolor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 0.9)
         return kolor
     }
     
-    func LoadResourceDemoFile(fileName : String, fileExt:String) ->XYGNDataSet
+    func GetGNXYDataSetFromFile(fileName : String, fileExt:String) ->XYGNDataSet
     {
         let dataSetXY = XYGNDataSet()
         if let url = Bundle.main.url(forResource: fileName, withExtension: fileExt)
         {
            if let fileContents = try? String(contentsOf: url)
            {
-                let data = cleanRows(file: fileContents)
-                let csvRows = csv(data: data)
+                let data = FixupFile(file: fileContents)
+                let csvRows = ParseDelimitedFile(data: data, delimiter: "\t")
                 let labelRow = csvRows[0]
                 
                 for k in 5 ..< labelRow.count{
                     dataSetXY.labels.updateValue(RandomColor(), forKey: labelRow[k])
                 }
-            
                 for i in 1 ..< csvRows.count
                 {
                     let r = csvRows[i]
@@ -42,7 +41,6 @@ class TSVReader {
                     if r.count < labelRow.count {
                         break
                     }
-                    
                     let _id: String = r[0]
                     let _nameID :String = r[1]
                     let _x:Float = Float(r[2]) ?? 0.0
@@ -67,18 +65,18 @@ class TSVReader {
         return dataSetXY
     }
 
-    func cleanRows(file:String)->String{
+    func FixupFile(file:String)->String{
         var cleanFile = file
         cleanFile = cleanFile.replacingOccurrences(of: "\r", with: "\n")
         cleanFile = cleanFile.replacingOccurrences(of: "\n\n", with: "\n")
         return cleanFile
     }
 
-    func csv(data: String) -> [[String]] {
+    func ParseDelimitedFile(data: String, delimiter:String) -> [[String]] {
         var result: [[String]] = []
         let rows = data.components(separatedBy: "\n")
         for row in rows {
-            let columns = row.components(separatedBy: "\t")
+            let columns = row.components(separatedBy: delimiter)
             result.append(columns)
         }
         return result

@@ -25,7 +25,7 @@ extension GNProMainViewViewController {
         
         let c = labs[indexPath.row]
         cell.textLabel?.text = c
-        cell.detailTextLabel?.text = String(format: "D %d", indexPath.row)
+        cell.detailTextLabel?.text = "" //String(format: "D %d", indexPath.row)
         return cell
     }
     
@@ -36,5 +36,7 @@ extension GNProMainViewViewController {
         let col = Array(plotData.labels)[indexPath.row].value
         
     }
+    
+    
     
 }

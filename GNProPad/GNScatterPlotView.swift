@@ -113,7 +113,7 @@ class GNScatterPlotView: UIView {
     func DrawPlot()
     {
         DrawAxis()
-        DrawPlotAxisLables()
+        //DrawPlotAxisLables()
         
         for p in plotData.dataValues{
             p.pointColor = plotData.subTypes[p.subType] ?? UIColor.black
@@ -126,6 +126,9 @@ class GNScatterPlotView: UIView {
             DrawDataSetSubTypeLabel(subt.key, subt.value, j)
             j = j + 1
         }
+        
+        
+        DrawColorGradientAxis()
 
     }
     
@@ -149,6 +152,24 @@ class GNScatterPlotView: UIView {
         DrawSeriesLabel(dset, p, col)
     }
     
+    func DrawColorGradientAxis()
+    {
+        
+        let view = UIView(frame: CGRect(x: plotMargin, y: plotMargin, width: plotMargin * -0.5, height: bounds.height - plotMargin * 2))
+        view.backgroundColor = UIColor.red
+        let gradient = CAGradientLayer()
+
+        gradient.frame = view.bounds
+        
+        let start = UIColor(red: CGFloat((255/255.0)), green: CGFloat((255/255.0)), blue: CGFloat((0/255.0)), alpha: 1.0)
+        let send = UIColor(red: CGFloat((0/255.0)), green: CGFloat((0/255.0)), blue: CGFloat((0/255.0)), alpha: 1.0)
+        //gradient.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor]
+        gradient.colors = [start.cgColor, send.cgColor]
+
+        view.layer.insertSublayer(gradient, at: 0)
+        addSubview(view)        
+    }
+    
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -158,9 +179,11 @@ class GNScatterPlotView: UIView {
     }
     */
     
+
     override init(frame aRect: CGRect)
     {
         super.init(frame:aRect)
+        
     }
     
     required init?(coder aDecoder: NSCoder)
