@@ -31,26 +31,15 @@ extension GNProMainViewViewController {
         let tsvReader = TSVReader()
         plotData = tsvReader.GetGNXYDataSetFromFile(fileName: "Dfile", fileExt: "tsv")
         
-        self.tableView.reloadData()
+        self.tableViewA.reloadData()
         self.tableViewB.reloadData()
         
         plotA.AddGNData(DataSet: plotData)
         plotB.AddGNData(DataSet: plotData)
         plotC.AddGNData(DataSet: plotData)
         
-        plotA.plotLabelX = "Data CCF-098-23"
-        plotA.plotLabelY = "Range VBG-99800-098"
-        plotA.TurnOnPlot()
         
-        
-        plotB.plotLabelX = "IND: XXD-223-0098-23"
-        plotB.plotLabelY = "DEP: DDR-009"
-        plotB.TurnOnPlot()
-        
-        
-        plotC.plotLabelX = "X: ZX-12-DF"
-        plotC.plotLabelY = "Y: GGG-P_09-0"
-        plotC.TurnOnPlot()
+        plotC.TurnOnPlot(inType: PLOT_TYPE.sub_type)
     }
     
     

@@ -20,7 +20,7 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
     @IBOutlet weak var plotB: GNScatterPlotView!
     @IBOutlet weak var plotC: GNScatterPlotView!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewA: UITableView!
     @IBOutlet weak var tableViewB: UITableView!
     
     

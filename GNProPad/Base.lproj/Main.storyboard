@@ -86,7 +86,7 @@
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yWs-if-PfX" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
-                                <rect key="frame" x="433" y="584" width="393" height="420"/>
+                                <rect key="frame" x="433" y="576" width="393" height="428"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
@@ -140,7 +140,7 @@
                         <outlet property="plotA" destination="lxF-hz-gsS" id="mga-7z-Jdy"/>
                         <outlet property="plotB" destination="yWs-if-PfX" id="XMk-5J-etX"/>
                         <outlet property="plotC" destination="XS1-GU-TIs" id="MNk-C0-WVa"/>
-                        <outlet property="tableView" destination="7lW-ft-KLI" id="gfN-Ut-Tig"/>
+                        <outlet property="tableViewA" destination="7lW-ft-KLI" id="gfN-Ut-Tig"/>
                         <outlet property="tableViewB" destination="v1Z-Yo-yso" id="0Fl-cY-6gI"/>
                     </connections>
                 </viewController>

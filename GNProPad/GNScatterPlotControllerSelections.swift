@@ -29,11 +29,23 @@ extension GNProMainViewViewController {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableViewW: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //let labs = Array(plotData.labels.keys)
-        let lab = Array(plotData.labels)[indexPath.row].key
-        let col = Array(plotData.labels)[indexPath.row].value
+        if tableViewW == tableViewA
+        {
+            let lab = Array(plotData.labels)[indexPath.row].key
+            _ = Array(plotData.labels)[indexPath.row].value
+            plotA.PlotLabel(label: lab)
+            plotA.TurnOnPlot(inType: PLOT_TYPE.label_type)
+        }
+        if tableViewW == tableViewB
+        {
+            let lab = Array(plotData.labels)[indexPath.row].key
+            _ = Array(plotData.labels)[indexPath.row].value
+            plotB.PlotLabel(label: lab)
+            plotB.TurnOnPlot(inType: PLOT_TYPE.label_type)
+        }
         
     }
     
