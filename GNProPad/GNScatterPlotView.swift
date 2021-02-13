@@ -144,10 +144,10 @@ class GNScatterPlotView: UIView {
     {
         DrawAxis()
         
-        plotData.dataValues.sort { $0.labels[plotData.labelSelected] ?? 0.0 <            $1.labels[plotData.labelSelected] ?? 0.0 }
+        let pSorted = plotData.dataValues.sorted { $0.labels[plotData.labelSelected] ?? 0.0 <            $1.labels[plotData.labelSelected] ?? 0.0 }
         
         
-        for p in plotData.dataValues{
+        for p in pSorted{
             let lVal = p.labels[plotData.labelSelected] ?? 0.0
             let v = ScaleLabelToColor(num: lVal, lmin: plotData.labelMin, lmax: plotData.labelMax)
 
@@ -182,7 +182,7 @@ class GNScatterPlotView: UIView {
     func DrawColorGradientAxis()
     {
         
-        let view = UIView(frame: CGRect(x: plotMargin, y: plotMargin, width: plotMargin * -0.5, height: bounds.height - plotMargin * 2))
+        let view = UIView(frame: CGRect(x: bounds.width - (plotMargin*0.5), y: plotMargin, width: (plotMargin*0.5), height: bounds.height - plotMargin * 2))
         view.backgroundColor = UIColor.red
         let gradient = CAGradientLayer()
 
