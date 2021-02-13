@@ -121,7 +121,11 @@ class GNScatterPlotView: UIView {
     
     override func draw(_ rect: CGRect)
     {
-        self.layer.sublayers = nil
+        for v in subviews
+        {
+            v.removeFromSuperview()
+        }
+        
         if plotType == PLOT_TYPE.sub_type
         {
             DrawPlotSubType()
@@ -133,7 +137,6 @@ class GNScatterPlotView: UIView {
         if plotType == PLOT_TYPE.label_type_not_selected
         {
             DrawPlotLabelNotSelected()
-            
         }
     }
     
@@ -184,7 +187,6 @@ class GNScatterPlotView: UIView {
             p.pointColor = col
             DrawMark(DataPoint: p)
         }
-        //DrawColorGradientAxis()
     }
     
     func DrawDataSetLabel(_ dset:XYGNDataSet, _ row:Int)
