@@ -41,6 +41,10 @@ class TSVReader {
                             "#008000"]
     
     
+    init() {
+        TSVReader.iColor = Int.random(in: 0..<cColors.count)
+    }
+
     func RandomColor2() -> UIColor {
         
         let rBlue = Double.random(in: 0...255)
@@ -53,10 +57,10 @@ class TSVReader {
 
         let s = cColors[TSVReader.iColor]
         TSVReader.iColor = TSVReader.iColor + 1
-        if TSVReader.iColor > 24 {
-            TSVReader.iColor = 0
+        if TSVReader.iColor > cColors.count-1 {
+            TSVReader.iColor = Int.random(in: 0..<cColors.count)
         }
-        return UIColor(hexString: s)
+        return UIColor(hexString: s, alpha: 0.75)
     }
     
     func GetDataSetFromBundleResource(fileName : String, fileExt:String) ->XYGNDataSet

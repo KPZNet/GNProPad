@@ -110,7 +110,7 @@ class GNScatterPlotView: UIView {
         SetPlotData(DataSet: plotData, plotFormat: plotFormat)
     }
     
-    func ClearPlot()
+    fileprivate func ClearPlot()
     {
         plotData = XYGNDataSet()
         setNeedsDisplay()
@@ -137,13 +137,13 @@ class GNScatterPlotView: UIView {
         }
     }
     
-    func TurnOnPlot(inType:PLOT_TYPE)
+    fileprivate func TurnOnPlot(inType:PLOT_TYPE)
     {
         plotType = inType
         setNeedsDisplay()
     }
     
-    func DrawPlotSubType()
+    fileprivate func DrawPlotSubType()
     {
         DrawAxis()
         
@@ -159,7 +159,7 @@ class GNScatterPlotView: UIView {
         }
     }
     
-    func DrawPlotLabel()
+    fileprivate func DrawPlotLabel()
     {
         DrawAxis()
         
@@ -174,7 +174,7 @@ class GNScatterPlotView: UIView {
         DrawColorGradientAxis()
     }
     
-    func DrawPlotLabelNotSelected()
+    fileprivate func DrawPlotLabelNotSelected()
     {
         DrawAxis()
         
@@ -186,7 +186,7 @@ class GNScatterPlotView: UIView {
         }
     }
     
-    func DrawDataSetSubTypeLabel(_ dset:String, _ col:UIColor, _ row:Int)
+    fileprivate func DrawDataSetSubTypeLabel(_ dset:String, _ col:UIColor, _ row:Int)
     {
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
         let textSize = textFont.sizeOfString( NSString(string: "XXXXXXXXXXX") )
@@ -196,7 +196,7 @@ class GNScatterPlotView: UIView {
         DrawSeriesLabel(dset, p, col)
     }
     
-    func DrawColorGradientAxis()
+    fileprivate func DrawColorGradientAxis()
     {
         
         let view = UIView(frame: CGRect(x: bounds.width - (plotMargin*0.5), y: plotMargin * 2.0, width: (plotMargin*0.5), height: bounds.height - plotMargin * 4))
@@ -238,7 +238,6 @@ class GNScatterPlotView: UIView {
     override init(frame aRect: CGRect)
     {
         super.init(frame:aRect)
-        
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -246,7 +245,7 @@ class GNScatterPlotView: UIView {
         super.init(coder:aDecoder)
     }
     
-    func SetupScales(XMin inXmin:CGFloat, XMax inXMax:CGFloat, YMin inYmin:CGFloat, YMax inYMax:CGFloat)
+    fileprivate func SetupScales(XMin inXmin:CGFloat, XMax inXMax:CGFloat, YMin inYmin:CGFloat, YMax inYMax:CGFloat)
     {
         xDataMin = inXmin
         xDataMax = inXMax
@@ -287,7 +286,7 @@ class GNScatterPlotView: UIView {
         return nValue
     }
     
-    func DrawAxis(){
+    fileprivate func DrawAxis(){
         let context = UIGraphicsGetCurrentContext()
         context?.move(to: CGPoint(x: plotMargin, y: plotMargin))
         context?.addLine(to: CGPoint(x: plotMargin, y: bounds.height - plotMargin))
@@ -305,7 +304,7 @@ class GNScatterPlotView: UIView {
         
     }
     
-    func DrawMark(DataPoint dataPoint : XYGNData)
+    fileprivate func DrawMark(DataPoint dataPoint : XYGNData)
     {
         let context = UIGraphicsGetCurrentContext()
         
@@ -319,7 +318,7 @@ class GNScatterPlotView: UIView {
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
     }
     
-    func DrawSeriesLabel(_ seriesLabel:String, _ loc:CGPoint, _ col:UIColor, _ rotate:Bool = false )
+    fileprivate func DrawSeriesLabel(_ seriesLabel:String, _ loc:CGPoint, _ col:UIColor, _ rotate:Bool = false )
     {
         var midPoint : CGPoint = CGPoint(x:0, y:0)
         
@@ -354,7 +353,7 @@ class GNScatterPlotView: UIView {
         DrawLabelSwatch(sRect, col)
     }
     
-    func DrawTextString(_ textString:String, _ loc:CGPoint, _ rotate:Bool = false )
+    fileprivate func DrawTextString(_ textString:String, _ loc:CGPoint, _ rotate:Bool = false )
     {
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
         let textSize = textFont.sizeOfString( NSString(string: textString) )
@@ -374,7 +373,7 @@ class GNScatterPlotView: UIView {
         addSubview(label)
     }
     
-    func DrawLabelSwatch(_ loc:CGRect, _ col:UIColor)
+    fileprivate func DrawLabelSwatch(_ loc:CGRect, _ col:UIColor)
     {
         
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
@@ -392,7 +391,7 @@ class GNScatterPlotView: UIView {
         context?.drawPath(using: CGPathDrawingMode.fillStroke) // or kCGPathFillStroke to fill and stroke the circle
     }
     
-    func ScaleLabelToColor(num:Float, lmin:Float, lmax:Float)->Float
+    fileprivate func ScaleLabelToColor(num:Float, lmin:Float, lmax:Float)->Float
     {
         return ( (num - lmin) / abs(lmin - lmax) ) * 255.0
     }
@@ -406,6 +405,25 @@ class GNScatterPlotView: UIView {
         plotData.labelSelected = label
         TurnOnPlot(inType: PLOT_TYPE.label_type)
         
+    }
+    
+    func GetSamplesInSelection(SelectionBox:CGRect)->XYGNDataSet{
+        var dSet = [XYGNData]()
+        for d in plotData.dataValues{
+            if SelectionBox.contains( DataPointToPlotPoint(Value: d) )
+            {
+                dSet.append(d)
+            }
+        }
+        let plotDataSet = XYGNDataSet()
+        plotDataSet.dataValues = dSet
+        plotDataSet.labelMax = 0.0
+        plotDataSet.labelMin = 0.0
+        plotDataSet.labelSelected = ""
+        plotDataSet.labels = plotData.labels
+        plotDataSet.subTypes = plotData.subTypes
+        plotDataSet.setColor = plotData.setColor
+        return plotDataSet
     }
     
 }

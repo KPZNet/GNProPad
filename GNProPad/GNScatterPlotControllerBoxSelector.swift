@@ -63,6 +63,31 @@ extension GNProMainViewViewController {
 
         //User has lift his finger, use the rect
         //applyFilterToSelectedArea(overlay.frame)
+        
+        
+        if let touch = touches.first
+        {
+            if touch.view == plotC
+            {
+                let r = overlay.convert(overlay.bounds, to:plotC)
+                let selectedSamples = plotC.GetSamplesInSelection(SelectionBox: r)
+                let newView = GNScatterPlotView()
+                
+                newView.layer.borderColor = UIColor.lightGray.cgColor
+                newView.backgroundColor = UIColor.clear.withAlphaComponent(1.0)
+                newView.isHidden = false
+                let screenBounds = UIScreen.main.bounds
+                let rect = CGRect(x:screenBounds.width/8,
+                                  y:screenBounds.height/8,
+                                  width:screenBounds.width/4,
+                                  height:screenBounds.height/4);
+
+                newView.frame = rect
+                newView.SetPlotData(DataSet: selectedSamples, plotFormat: PLOT_TYPE.sub_type)
+                UIScreen.main.addSubview(newView)
+            }
+        }
+         
 
         overlay.frame = CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0)
     }
