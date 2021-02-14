@@ -36,9 +36,6 @@ class XYGNDataSet {
     var labelMin:Float = 0.0
     var labelMax:Float = 0.0
     var labelSelected:String = ""
-    var xLabel : String = "X Label"
-    var yLabel : String = "Y Label"
-    var plotLabel : String = "Plot Label"
     var setColor = UIColor(cgColor: UIColor.black.cgColor)
 }
 
@@ -189,16 +186,6 @@ class GNScatterPlotView: UIView {
         }
     }
     
-    func DrawDataSetLabel(_ dset:XYGNDataSet, _ row:Int)
-    {
-        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
-        let textSize = textFont.sizeOfString( NSString(string: "XXXXXXXXXXX") )
-        let x = (bounds.width - textSize.width)
-        let y = (bounds.height * 0.8) + ( plotLabelTextSize.height * CGFloat(row) )
-        let p = CGPoint(x: x, y: y)
-        DrawSeriesLabel(dset.plotLabel, p, dset.setColor)
-    }
-    
     func DrawDataSetSubTypeLabel(_ dset:String, _ col:UIColor, _ row:Int)
     {
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
@@ -212,7 +199,7 @@ class GNScatterPlotView: UIView {
     func DrawColorGradientAxis()
     {
         
-        let view = UIView(frame: CGRect(x: bounds.width - (plotMargin*0.5), y: plotMargin, width: (plotMargin*0.5), height: bounds.height - plotMargin * 2))
+        let view = UIView(frame: CGRect(x: bounds.width - (plotMargin*0.5), y: plotMargin * 2.0, width: (plotMargin*0.5), height: bounds.height - plotMargin * 4))
         view.backgroundColor = UIColor.red
         let gradient = CAGradientLayer()
 
@@ -220,13 +207,33 @@ class GNScatterPlotView: UIView {
         
         let sstart = UIColor(red: CGFloat((255/255.0)), green: CGFloat((255/255.0)), blue: CGFloat((0/255.0)), alpha: 1.0)
         let send = UIColor(red: CGFloat((0/255.0)), green: CGFloat((0/255.0)), blue: CGFloat((0/255.0)), alpha: 1.0)
-        //gradient.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor]
         gradient.colors = [sstart.cgColor, send.cgColor]
 
         view.layer.insertSublayer(gradient, at: 0)
-        addSubview(view)        
+        addSubview(view)
+        
+        DrawGradientScaler()
     }
     
+    fileprivate func DrawGradientScaler() {
+        
+        let mx = String(format: " %.2f", plotData.labelMax)
+        let mn = String(format: " %.2f", plotData.labelMin)
+        
+        let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
+        var textSize = textFont.sizeOfString( NSString(string: mx) )
+        
+        var xa = CGPoint()
+        xa.x = bounds.width - (textSize.width)
+        xa.y = plotMargin
+        DrawTextString(mx, xa, false)
+        
+        textSize = textFont.sizeOfString( NSString(string: mn) )
+        var ya = CGPoint()
+        ya.x = bounds.width - (textSize.width)
+        ya.y = bounds.height - plotMargin * 2
+        DrawTextString(mn, ya, false)
+    }
 
     override init(frame aRect: CGRect)
     {
@@ -278,18 +285,6 @@ class GNScatterPlotView: UIView {
         nValue.y -= plotMargin
         
         return nValue
-    }
-    
-    fileprivate func DrawPlotAxisLables() {
-        var xa = CGPoint()
-        xa.x = plotMargin/2.0
-        xa.y = bounds.height/2.0
-        DrawAxisLabel(plotLabelY, xa, true)
-        
-        var ya = CGPoint()
-        ya.x = bounds.width/2.0
-        ya.y = bounds.height - (plotMargin/2.0)
-        DrawAxisLabel(plotLabelX, ya, false)
     }
     
     func DrawAxis(){
@@ -359,21 +354,16 @@ class GNScatterPlotView: UIView {
         DrawLabelSwatch(sRect, col)
     }
     
-    func DrawAxisLabel(_ seriesLabel:String, _ loc:CGPoint, _ rotate:Bool = false )
+    func DrawTextString(_ textString:String, _ loc:CGPoint, _ rotate:Bool = false )
     {
-        var midPoint : CGPoint = CGPoint(x:0, y:0)
-        
-        midPoint.x = loc.x
-        midPoint.y = loc.y
-        
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
-        let textSize = textFont.sizeOfString( NSString(string: seriesLabel + "XX") )
-        let sRect:CGRect = CGRect(x: midPoint.x, y: midPoint.y, width: textSize.width, height: textSize.height)
+        let textSize = textFont.sizeOfString( NSString(string: textString) )
+        let sRect:CGRect = CGRect(x: loc.x, y: loc.y, width: textSize.width, height: textSize.height)
         let label = UILabel(frame: sRect)
-        label.center = midPoint
+        //label.center = midPoint
         label.font = textFont
-        label.textAlignment = NSTextAlignment.center
-        label.text = seriesLabel
+        label.textAlignment = NSTextAlignment.left
+        label.text = textString
         label.layer.masksToBounds = true
         if(rotate)
         {
