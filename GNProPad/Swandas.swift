@@ -10,14 +10,53 @@ import UIKit
 import GameplayKit
 
 class TSVReader {
-
-    func RandomColor() -> UIColor {
+    
+    static var iColor:Int = 0
+    
+    var cColors:[String] = [
+                            "#FF0000",
+                            "#00FF00",
+                            "#0000FF",
+                            "#FFFF00",
+                            "#00FFFF",
+                            "#FF00FF",
+                            "#808080",
+                            "#FF8080",
+                            "#80FF80",
+                            "#8080FF",
+                            "#008080",
+                            "#800080",
+                            "#808000",
+                            "#FFFF80",
+                            "#80FFFF",
+                            "#FF80FF",
+                            "#FF0080",
+                            "#80FF00",
+                            "#0080FF",
+                            "#00FF80",
+                            "#8000FF",
+                            "#FF8000",
+                            "#000080",
+                            "#800000",
+                            "#008000"]
+    
+    
+    func RandomColor2() -> UIColor {
         
         let rBlue = Double.random(in: 0...255)
         let rGreen = Double.random(in: 0...255)
         let rRed = Double.random(in: 0...255)
         let kolor = UIColor(red: CGFloat((rRed/255.0)), green: CGFloat((rGreen/255.0)), blue: CGFloat((rBlue/255.0)), alpha: 1.0)
         return kolor
+    }
+    func RandomColor() -> UIColor{
+
+        let s = cColors[TSVReader.iColor]
+        TSVReader.iColor = TSVReader.iColor + 1
+        if TSVReader.iColor > 24 {
+            TSVReader.iColor = 0
+        }
+        return UIColor(hexString: s)
     }
     
     func GetDataSetFromBundleResource(fileName : String, fileExt:String) ->XYGNDataSet
@@ -89,5 +128,35 @@ extension UIFont {
                                    options: NSStringDrawingOptions.usesLineFragmentOrigin,
                                    attributes: [NSAttributedString.Key.font: self],
                                    context: nil).size
+    }
+}
+
+
+extension UIColor {
+    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        self.init(red:red, green:green, blue:blue, alpha:alpha)
+    }
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return String(format:"#%06x", rgb)
     }
 }

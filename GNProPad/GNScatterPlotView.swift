@@ -217,8 +217,8 @@ class GNScatterPlotView: UIView {
     
     fileprivate func DrawGradientScaler() {
         
-        let mx = String(format: " %.2f", plotData.labelMax)
-        let mn = String(format: " %.2f", plotData.labelMin)
+        let mx = String(format: "%.2f", plotData.labelMax)
+        let mn = String(format: "%.2f", plotData.labelMin)
         
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
         var textSize = textFont.sizeOfString( NSString(string: mx) )

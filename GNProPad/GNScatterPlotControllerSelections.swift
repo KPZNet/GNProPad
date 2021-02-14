@@ -21,8 +21,8 @@ extension GNProMainViewViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "GNScatterCell")!
-            
-        let labs = Array(plotData.labels.keys)
+        
+        let labs = Array(plotData.labels.keys).sorted()
         
         let c = labs[indexPath.row]
         cell.textLabel?.text = c
