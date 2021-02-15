@@ -58,13 +58,15 @@ class TSVReader {
         let s = cColors[TSVReader.iColor]
         TSVReader.iColor = TSVReader.iColor + 1
         if TSVReader.iColor > cColors.count-1 {
-            TSVReader.iColor = Int.random(in: 0..<cColors.count)
+            //TSVReader.iColor = Int.random(in: 0..<cColors.count)
+            TSVReader.iColor = 0
         }
         return UIColor(hexString: s, alpha: 0.75)
     }
     
     func GetDataSetFromBundleResource(fileName : String, fileExt:String) ->XYGNDataSet
     {
+        //TSVReader.iColor = 0
         let dataSetXY = XYGNDataSet()
         if let url = Bundle.main.url(forResource: fileName, withExtension: fileExt)
         {

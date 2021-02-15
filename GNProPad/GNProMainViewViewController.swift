@@ -12,6 +12,8 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
     
     
     let overlay = UIView()
+    let newView = GNScatterPlotView()
+    
     var lastPoint = CGPoint(x: 0.0, y: 0.0)
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -34,13 +36,14 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
         //scrollView.maximumZoomScale = 10.0
         
         // Add tap gesture recognizer to view
-        addGestures()
+        //addGestures()
         
         SetupSelectionBox()
     }
     
     @IBAction func PlotCellScatter(_ sender: AnyObject) {
         
+        newView.isHidden = true
         SimulatePlot()
         
     }
