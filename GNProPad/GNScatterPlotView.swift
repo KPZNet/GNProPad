@@ -70,6 +70,7 @@ class GNScatterPlotView: UIView {
     var plotDataMarkerLineWidth: CGFloat = 0.0
     
     var plotMargin : CGFloat = 0.0
+    var plotMarginData : CGFloat = 0.0
     
     var axisLineWidth : CGFloat = 0.0
     var axisLineColor = UIColor.black
@@ -125,15 +126,15 @@ class GNScatterPlotView: UIView {
         
         if plotType == PLOT_TYPE.sub_type
         {
-            DrawPlotSubType()
+            DrawPlot_SubLabel()
         }
         if plotType == PLOT_TYPE.label_type
         {
-            DrawPlotLabel()
+            DrawPlot_GeneLabel()
         }
         if plotType == PLOT_TYPE.label_type_not_selected
         {
-            DrawPlotLabelNotSelected()
+            DrawPlot_NoType()
         }
     }
     
@@ -143,7 +144,7 @@ class GNScatterPlotView: UIView {
         setNeedsDisplay()
     }
     
-    fileprivate func DrawPlotSubType()
+    fileprivate func DrawPlot_SubLabel()
     {
         DrawAxis()
         
@@ -159,7 +160,7 @@ class GNScatterPlotView: UIView {
         }
     }
     
-    fileprivate func DrawPlotLabel()
+    fileprivate func DrawPlot_GeneLabel()
     {
         DrawAxis()
         
@@ -174,7 +175,7 @@ class GNScatterPlotView: UIView {
         DrawColorGradientAxis()
     }
     
-    fileprivate func DrawPlotLabelNotSelected()
+    fileprivate func DrawPlot_NoType()
     {
         DrawAxis()
         
@@ -258,15 +259,22 @@ class GNScatterPlotView: UIView {
         plotLabelTextSize = textFont.sizeOfString( NSString(string: "XXX") )
         
         plotMargin = plotLabelTextSize.height * 1.5
-        let plotMargin2 = plotMargin * 2.0
+        plotMarginData = plotMargin * 2.2
         
-        xDataToPlotScale = (bounds.size.width - plotMargin2) / CGFloat(xDataRange)
-        yDataToPlotScale = (bounds.size.height - plotMargin2) / CGFloat(yDataRange)
+        _  = CGFloat(1.0)
         
         let screenBounds = UIScreen.main.bounds
         let width = screenBounds.width
         let height = screenBounds.height
         let smallAxis = min(height, width)
+        
+        let squareAxis = min (bounds.width, bounds.height)
+        
+        xDataToPlotScale = (squareAxis - plotMarginData) / CGFloat(xDataRange)
+        yDataToPlotScale = (squareAxis - plotMarginData) / CGFloat(yDataRange)
+        
+        //xDataToPlotScale = (bounds.size.width - plotMarginData) / CGFloat(xDataRange)
+        //yDataToPlotScale = (  (bounds.size.height) - plotMarginData) / CGFloat(yDataRange)
         
         plotDataMarkerSize = smallAxis * plotDataMarkerScaler
         
@@ -277,11 +285,17 @@ class GNScatterPlotView: UIView {
     fileprivate func DataPointToPlotPoint(Value val:XYGNData) -> CGPoint{
         
         var nValue = CGPoint()
-        nValue.x = ( CGFloat(val.x) - xDataMin) * xDataToPlotScale
-        nValue.y = (((( CGFloat(val.y) - yDataMin) * yDataToPlotScale)) - bounds.size.height) * -1.0
         
-        nValue.x += plotMargin
-        nValue.y -= plotMargin
+        var ySpacer = 0.5 * (((( yDataRange ) * yDataToPlotScale)) - bounds.size.height) * -1.0
+        ySpacer -= (plotMarginData * 0.5)
+        
+        nValue.x = ( CGFloat(val.x) - xDataMin) * xDataToPlotScale
+        nValue.y =  (((( CGFloat(val.y) - yDataMin) * yDataToPlotScale)) - bounds.size.height) * -1.0
+        
+        nValue.y -= ySpacer
+        
+        nValue.x += (plotMarginData * 0.5)
+        nValue.y -= (plotMarginData * 0.5)
         
         return nValue
     }
