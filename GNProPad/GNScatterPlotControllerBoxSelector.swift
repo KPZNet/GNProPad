@@ -30,7 +30,7 @@ extension GNProMainViewViewController {
         
         newView.isHidden = true
         let screenBounds = UIScreen.main.bounds
-        let rect = CGRect(x:screenBounds.width/4,
+        let rect = CGRect(x:screenBounds.width/3,
                           y:screenBounds.height/4,
                           width: 325,
                           height: 450);
