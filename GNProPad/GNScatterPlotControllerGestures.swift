@@ -12,12 +12,6 @@ import GameplayKit
 extension GNProMainViewViewController {
     
 
-    
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        //return image
-        plotB
-    }
-
     // MARK: Handle Gesture detection
     @objc func swipeGetstureDetected() {
         //print("Swipe Gesture detected!!")

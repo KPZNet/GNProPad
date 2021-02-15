@@ -9,14 +9,10 @@ import UIKit
 import GameplayKit
 
 class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITableViewDelegate, UIScrollViewDelegate{
-    
-    
+        
     let overlay = UIView()
-    let newView = GNScatterPlotView()
     
     var lastPoint = CGPoint(x: 0.0, y: 0.0)
-    
-    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var plotA: GNScatterPlotView!
     @IBOutlet weak var plotB: GNScatterPlotView!
@@ -25,25 +21,28 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
     @IBOutlet weak var tableViewA: UITableView!
     @IBOutlet weak var tableViewB: UITableView!
     
+    //@IBOutlet weak var cntView: UIContentContainer!
+
+    @IBOutlet weak var mView: UIView!
+    @IBOutlet weak var miniScatterView: MiniScatterControllerViewController!
+    
     
     var plotData = XYGNDataSet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //scrollView.delegate = self
-        //scrollView.minimumZoomScale = 1.0
-        //scrollView.maximumZoomScale = 10.0
         
         // Add tap gesture recognizer to view
         //addGestures()
+        
+        mView.isHidden = true
         
         SetupSelectionBox()
     }
     
     @IBAction func PlotCellScatter(_ sender: AnyObject) {
         
-        newView.isHidden = true
+        //newView.isHidden = true
         SimulatePlot()
         
     }
@@ -63,5 +62,16 @@ class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITab
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+            if segue.identifier == "MiniScatterSeg"
+            {
+                if let msv = segue.destination as? MiniScatterControllerViewController
+                {
+                    self.miniScatterView = msv
+                }
+            }
+    }
 
 }

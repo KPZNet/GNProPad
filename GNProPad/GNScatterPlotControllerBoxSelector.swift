@@ -19,23 +19,6 @@ extension GNProMainViewViewController {
         overlay.isHidden = true
         self.view.addSubview(overlay)
         
-        
-        newView.layer.borderColor = UIColor.black.cgColor
-        newView.backgroundColor = UIColor.systemGray6.withAlphaComponent(1.0)
-        
-        newView.layer.borderColor = UIColor.black.cgColor
-        newView.layer.borderWidth = 1.5
-        newView.layer.cornerRadius = 5
-        newView.layer.masksToBounds = true
-        
-        newView.isHidden = true
-        let screenBounds = UIScreen.main.bounds
-        let rect = CGRect(x:screenBounds.width/3,
-                          y:screenBounds.height/4,
-                          width: 325,
-                          height: 450);
-        newView.frame = rect
-        view.addSubview(newView)
     }
     
     func reDrawSelectionArea(fromPoint: CGPoint, toPoint: CGPoint) {
@@ -59,7 +42,7 @@ extension GNProMainViewViewController {
             
             if touch.view != plotC
             {
-                newView.isHidden = true
+                mView.isHidden = true
             }
         }
     }
@@ -82,8 +65,8 @@ extension GNProMainViewViewController {
             {
                 let r = overlay.convert(overlay.bounds, to:plotC)
                 let selectedSamples = plotC.GetSamplesInSelection(SelectionBox: r)
-                newView.SetPlotData(DataSet: selectedSamples, plotFormat: PLOT_TYPE.sub_type)
-                newView.isHidden = false
+                miniScatterView.SetPlotData(DataSet: selectedSamples, plotFormat: PLOT_TYPE.sub_type)
+                mView.isHidden = false
             }
         }
         overlay.frame = CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0)

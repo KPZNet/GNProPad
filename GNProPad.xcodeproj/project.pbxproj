@@ -21,6 +21,8 @@
 		71623C2125CB1FE9008460B3 /* GNProPadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C2025CB1FE9008460B3 /* GNProPadUITests.swift */; };
 		71623C3A25CB48DF008460B3 /* GNScatterPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */; };
 		71623C3F25CB5D54008460B3 /* GNProMainViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */; };
+		718BB35A25DAFDFB00E8FD6A /* MiniScatterControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718BB35925DAFDFB00E8FD6A /* MiniScatterControllerViewController.swift */; };
+		718BB36225DB013300E8FD6A /* MiniScatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718BB36125DB013300E8FD6A /* MiniScatterView.swift */; };
 		71AC886025D4DBFE00D5D6F1 /* Swandas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC885F25D4DBFE00D5D6F1 /* Swandas.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		71623C2225CB1FE9008460B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71623C3925CB48DF008460B3 /* GNScatterPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNScatterPlotView.swift; sourceTree = "<group>"; };
 		71623C3E25CB5D54008460B3 /* GNProMainViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNProMainViewViewController.swift; sourceTree = "<group>"; };
+		718BB35925DAFDFB00E8FD6A /* MiniScatterControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScatterControllerViewController.swift; sourceTree = "<group>"; };
+		718BB36125DB013300E8FD6A /* MiniScatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniScatterView.swift; sourceTree = "<group>"; };
 		71AC885F25D4DBFE00D5D6F1 /* Swandas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swandas.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +131,8 @@
 				714B7EEB25D22E6100851455 /* GNScatterPlotControllerSelections.swift */,
 				714B7EF025D22F3700851455 /* GNProScatterPlotControllerPlots.swift */,
 				7134D52525D327A100F75AFF /* GNScatterPlotControllerBoxSelector.swift */,
+				718BB35925DAFDFB00E8FD6A /* MiniScatterControllerViewController.swift */,
+				718BB36125DB013300E8FD6A /* MiniScatterView.swift */,
 			);
 			path = GNProPad;
 			sourceTree = "<group>";
@@ -284,10 +290,12 @@
 				71AC886025D4DBFE00D5D6F1 /* Swandas.swift in Sources */,
 				71623BFF25CB1FE8008460B3 /* AppDelegate.swift in Sources */,
 				71623C0125CB1FE8008460B3 /* SceneDelegate.swift in Sources */,
+				718BB36225DB013300E8FD6A /* MiniScatterView.swift in Sources */,
 				7134D52625D327A100F75AFF /* GNScatterPlotControllerBoxSelector.swift in Sources */,
 				714B7EEC25D22E6100851455 /* GNScatterPlotControllerSelections.swift in Sources */,
 				714B7EF125D22F3700851455 /* GNProScatterPlotControllerPlots.swift in Sources */,
 				714B7EDF25D229C400851455 /* GNScatterPlotControllerGestures.swift in Sources */,
+				718BB35A25DAFDFB00E8FD6A /* MiniScatterControllerViewController.swift in Sources */,
 				71623C3F25CB5D54008460B3 /* GNProMainViewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

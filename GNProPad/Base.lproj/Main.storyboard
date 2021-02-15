@@ -132,26 +132,62 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqt-Fe-U59">
+                                <rect key="frame" x="469" y="284" width="610" height="503"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="X02-Xs-c5v" kind="embed" identifier="MiniScatterSeg" id="CR9-sx-d3p"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="mView" destination="aqt-Fe-U59" id="uhO-TW-JGI"/>
                         <outlet property="plotA" destination="lxF-hz-gsS" id="mga-7z-Jdy"/>
                         <outlet property="plotB" destination="yWs-if-PfX" id="XMk-5J-etX"/>
                         <outlet property="plotC" destination="XS1-GU-TIs" id="MNk-C0-WVa"/>
                         <outlet property="tableViewA" destination="7lW-ft-KLI" id="gfN-Ut-Tig"/>
                         <outlet property="tableViewB" destination="v1Z-Yo-yso" id="0Fl-cY-6gI"/>
+                        <outlet property="view" destination="8bC-Xf-vdC" id="1Eh-3G-de1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.48169838945827" y="102.5390625"/>
+            <point key="canvasLocation" x="133" y="-93"/>
+        </scene>
+        <!--Mini Scatter Controller View Controller-->
+        <scene sceneID="xks-2M-3a3">
+            <objects>
+                <viewController id="X02-Xs-c5v" customClass="MiniScatterControllerViewController" customModule="GNProPad" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nf6-El-69P">
+                        <rect key="frame" x="0.0" y="0.0" width="610" height="503"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hgd-3c-rUV" customClass="GNScatterPlotView" customModule="GNProPad" customModuleProvider="target">
+                                <rect key="frame" x="20" y="33" width="325" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                    </view>
+                    <connections>
+                        <outlet property="plotA" destination="hgd-3c-rUV" id="9Oc-xP-Eu8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vrk-7P-Odt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="600" y="-19"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
