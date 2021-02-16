@@ -255,6 +255,8 @@ class GNScatterPlotView: UIView {
         xDataRange = abs(xDataMax - xDataMin)
         yDataRange = abs(yDataMax - yDataMin)
         
+        let largeRange = max(xDataRange, yDataRange)
+        
         let textFont:UIFont = UIFont(name: "Helvetica", size: CGFloat(10))!
         plotLabelTextSize = textFont.sizeOfString( NSString(string: "XXX") )
         
@@ -269,9 +271,13 @@ class GNScatterPlotView: UIView {
         let smallAxis = min(height, width)
         
         let squareAxis = min (bounds.width, bounds.height)
+        let commonDataScale = (squareAxis - plotMarginData) / CGFloat(largeRange)
         
-        xDataToPlotScale = (squareAxis - plotMarginData) / CGFloat(xDataRange)
-        yDataToPlotScale = (squareAxis - plotMarginData) / CGFloat(yDataRange)
+        xDataToPlotScale = commonDataScale
+        yDataToPlotScale = commonDataScale
+        
+        //xDataToPlotScale = (squareAxis - plotMarginData) / CGFloat(xDataRange)
+        //yDataToPlotScale = (squareAxis - plotMarginData) / CGFloat(yDataRange)
         
         //xDataToPlotScale = (bounds.size.width - plotMarginData) / CGFloat(xDataRange)
         //yDataToPlotScale = (  (bounds.size.height) - plotMarginData) / CGFloat(yDataRange)
