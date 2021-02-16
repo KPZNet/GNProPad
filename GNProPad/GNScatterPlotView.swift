@@ -292,15 +292,19 @@ class GNScatterPlotView: UIView {
         
         var nValue = CGPoint()
         
+        var xSpacer = 0.5 * (((( xDataRange ) * xDataToPlotScale)) - bounds.size.width)
+        xSpacer -= (plotMarginData * 0.5)
+        
         var ySpacer = 0.5 * (((( yDataRange ) * yDataToPlotScale)) - bounds.size.height) * -1.0
         ySpacer -= (plotMarginData * 0.5)
         
-        nValue.x = ( CGFloat(val.x) - xDataMin) * xDataToPlotScale
+        nValue.x =  ((( CGFloat(val.x) - xDataMin) * xDataToPlotScale))
         nValue.y =  (((( CGFloat(val.y) - yDataMin) * yDataToPlotScale)) - bounds.size.height) * -1.0
         
+        nValue.x -= xSpacer
         nValue.y -= ySpacer
         
-        nValue.x += (plotMarginData * 0.5)
+        nValue.x -= (plotMarginData * 0.5)
         nValue.y -= (plotMarginData * 0.5)
         
         return nValue
