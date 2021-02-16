@@ -136,6 +136,7 @@ class GNScatterPlotView: UIView {
         {
             DrawPlot_NoType()
         }
+        DrawViewBorder()
     }
     
     fileprivate func TurnOnPlot(inType:PLOT_TYPE)
@@ -146,7 +147,7 @@ class GNScatterPlotView: UIView {
     
     fileprivate func DrawPlot_SubLabel()
     {
-        DrawAxis()
+        //DrawAxis()
         
         for p in plotData.dataValues{
             p.pointColor = plotData.subTypes[p.subType] ?? UIColor.black
@@ -162,7 +163,7 @@ class GNScatterPlotView: UIView {
     
     fileprivate func DrawPlot_GeneLabel()
     {
-        DrawAxis()
+        //DrawAxis()
         
         let pSorted = plotData.dataValues.sorted { $0.labels[plotData.labelSelected] ?? 0.0 < $1.labels[plotData.labelSelected] ?? 0.0 }
         for p in pSorted{
@@ -177,7 +178,7 @@ class GNScatterPlotView: UIView {
     
     fileprivate func DrawPlot_NoType()
     {
-        DrawAxis()
+        //DrawAxis()
         
         let pSorted = plotData.dataValues.sorted { $0.labels[plotData.labelSelected] ?? 0.0 < $1.labels[plotData.labelSelected] ?? 0.0 }
         for p in pSorted{
@@ -225,17 +226,24 @@ class GNScatterPlotView: UIView {
         var textSize = textFont.sizeOfString( NSString(string: mx) )
         
         var xa = CGPoint()
-        xa.x = bounds.width - (textSize.width)
+        xa.x = bounds.width - (textSize.width * 1.1)
         xa.y = plotMargin
         DrawTextString(mx, xa, false)
         
         textSize = textFont.sizeOfString( NSString(string: mn) )
         var ya = CGPoint()
-        ya.x = bounds.width - (textSize.width)
+        ya.x = bounds.width - (textSize.width * 1.1)
         ya.y = bounds.height - plotMargin * 2
         DrawTextString(mn, ya, false)
     }
 
+    fileprivate func DrawViewBorder() {
+        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 5
+        layer.masksToBounds = true
+    }
+    
     override init(frame aRect: CGRect)
     {
         super.init(frame:aRect)
