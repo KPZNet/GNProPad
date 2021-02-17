@@ -61,7 +61,7 @@ class TSVReader {
             //TSVReader.iColor = Int.random(in: 0..<cColors.count)
             TSVReader.iColor = 0
         }
-        return UIColor(hexString: s, alpha: 0.75)
+        return UIColor(hexString: s, alpha: 1.0)
     }
     
     func GetDataSetFromBundleResource(fileName : String, fileExt:String) ->XYGNDataSet
