@@ -7,16 +7,10 @@
 
 import Foundation
 import UIKit
-import GameplayKit
 
 
 extension GNProMainViewViewController {
     
-    func GetNormal(_ low:Int, _ high:Int) -> Int{
-        let random = GKRandomSource()
-        let dice = GKGaussianDistribution(randomSource: random, lowestValue: low, highestValue: high)
-        return dice.nextInt()
-    }
     
     func LoadPlotSimulations() {
 

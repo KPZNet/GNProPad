@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GameplayKit
 
 class GNProMainViewViewController: UIViewController, UITableViewDataSource,UITableViewDelegate, UIScrollViewDelegate{
         

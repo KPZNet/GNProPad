@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import GameplayKit
 
 class MiniScatterControllerViewController: UIViewController {
 
