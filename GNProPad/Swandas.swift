@@ -42,7 +42,7 @@ class TSVReader {
     
     
     init() {
-        TSVReader.iColor = Int.random(in: 0..<cColors.count)
+        TSVReader.iColor = 0 //Int.random(in: 0..<cColors.count)
     }
 
     func RandomColor2() -> UIColor {
@@ -77,8 +77,9 @@ class TSVReader {
                 let labelRow = csvRows[0]
                 
                 for k in 5 ..< labelRow.count{
-                    dataSetXY.labels.updateValue(RandomColor(), forKey: labelRow[k])
+                    dataSetXY.labels.updateValue(k-5, forKey: labelRow[k])
                 }
+                dataSetXY.sortedLabels = Array(dataSetXY.labels.keys).sorted()
                 for i in 1 ..< csvRows.count
                 {
                     let r = csvRows[i]
@@ -94,14 +95,16 @@ class TSVReader {
                     dataSetXY.subTypes.updateValue(RandomColor(), forKey: _subType)
                     
                     var labelDict = [String:Float]()
+                    var indexLabel = [Float]()
                     for j in 5 ..< labelRow.count
                     {
                         let r_j = r[j]
                         let r_j_label = labelRow[j]
                         let rjVal = Float( r_j ) ?? 0.0
                         labelDict.updateValue(rjVal, forKey: r_j_label)
+                        indexLabel.append(rjVal)
                     }
-                    let xyRow = XYGNData(X: _x, Y: _y, ID: _id, NameID: _nameID, SubType: _subType, Labels: labelDict)
+                    let xyRow = XYGNData(X: _x, Y: _y, ID: _id, NameID: _nameID, SubType: _subType, Labels: labelDict, IndexLabels: indexLabel)
                     dataSetXY.dataValues.append(xyRow)
                 }
            }

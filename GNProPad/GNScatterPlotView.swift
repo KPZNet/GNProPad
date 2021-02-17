@@ -13,25 +13,28 @@ class XYGNData {
     var id : String
     var nameID : String
     var subType : String
-    var labels : [String:Float]
+    //var labels : [String:Float]
+    var indexLabels = [Float]()
     var x : Float = 0.0
     var y : Float = 0.0
     var pointColor : UIColor = UIColor.black
     var relativeSize:Float = 1.0
-    init(X: Float = 0.0, Y: Float=0.0, ID:String, NameID:String, SubType:String, Labels:[String:Float])
+    init(X: Float = 0.0, Y: Float=0.0, ID:String, NameID:String, SubType:String, Labels:[String:Float], IndexLabels:[Float])
     {
         self.x = X
         self.y = Y
         self.id = ID
         self.nameID = NameID
         self.subType = SubType
-        self.labels = Labels
+        //self.labels = Labels
+        self.indexLabels = IndexLabels
     }
 }
 
 class XYGNDataSet {
     var dataValues  = [XYGNData]()
-    var labels = [String:UIColor]()
+    var labels = [String:Int]()
+    var sortedLabels = [String]()
     var subTypes = [String:UIColor]()
     var labelMin:Float = 0.0
     var labelMax:Float = 0.0
@@ -164,10 +167,10 @@ class GNScatterPlotView: UIView {
     fileprivate func DrawPlot_GeneLabel()
     {
         //DrawAxis()
-        
-        let pSorted = plotData.dataValues.sorted { $0.labels[plotData.labelSelected] ?? 0.0 < $1.labels[plotData.labelSelected] ?? 0.0 }
+        let i = plotData.labels[plotData.labelSelected] ?? 0
+        let pSorted = plotData.dataValues.sorted { $0.indexLabels[i] < $1.indexLabels[i] }
         for p in pSorted{
-            let lVal = p.labels[plotData.labelSelected] ?? 0.0
+            let lVal = p.indexLabels[i]
             let v = ScaleLabelToColor(num: lVal, lmin: plotData.labelMin, lmax: plotData.labelMax)
             let col = UIColor(red: CGFloat((v/255.0)), green: CGFloat((v/255.0)), blue: CGFloat((0/255.0)), alpha: 0.8)
             p.pointColor = col
@@ -180,7 +183,8 @@ class GNScatterPlotView: UIView {
     {
         //DrawAxis()
         
-        let pSorted = plotData.dataValues.sorted { $0.labels[plotData.labelSelected] ?? 0.0 < $1.labels[plotData.labelSelected] ?? 0.0 }
+        let i = plotData.labels[plotData.labelSelected] ?? 0
+        let pSorted = plotData.dataValues.sorted { $0.indexLabels[i] < $1.indexLabels[i] }
         for p in pSorted{
             let col = UIColor.clear
             p.pointColor = col
@@ -430,10 +434,11 @@ class GNScatterPlotView: UIView {
     
     func SelectGeneLabel(label:String)
     {
-        let xmin = plotData.dataValues.min { a, b in a.labels[label] ?? 0.0 < b.labels[label] ?? 0.0 }
-        let xmax = plotData.dataValues.max { a, b in a.labels[label] ?? 0.0 < b.labels[label] ?? 0.0 }
-        plotData.labelMin = xmin?.labels[label] ?? 0.0
-        plotData.labelMax = xmax?.labels[label] ?? 0.0
+        let i = plotData.labels[label] ?? 0
+        let xmin = plotData.dataValues.min { a, b in a.indexLabels[i] < b.indexLabels[i] }
+        let xmax = plotData.dataValues.max { a, b in a.indexLabels[i] < b.indexLabels[i] }
+        plotData.labelMin = xmin?.indexLabels[i] ?? 0.0
+        plotData.labelMax = xmax?.indexLabels[i] ?? 0.0
         plotData.labelSelected = label
         TurnOnPlot(inType: PLOT_TYPE.label_type)
         

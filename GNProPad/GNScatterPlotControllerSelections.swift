@@ -32,8 +32,7 @@ extension GNProMainViewViewController {
     
     func tableView(_ tableViewW: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let labs = (Array(plotData.labels.keys).sorted())[indexPath.row]
-        //let l = labs[indexPath.row]
+        let labs = plotData.sortedLabels[indexPath.row]
         if tableViewW == tableViewA
         {
             plotA.SelectGeneLabel(label: labs)
