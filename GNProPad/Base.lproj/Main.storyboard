@@ -134,7 +134,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqt-Fe-U59">
-                                <rect key="frame" x="85" y="104" width="605" height="406"/>
+                                <rect key="frame" x="158" y="140" width="605" height="406"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="X02-Xs-c5v" kind="embed" identifier="MiniScatterSeg" id="CR9-sx-d3p"/>
@@ -225,7 +225,8 @@
                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                     </view>
                     <connections>
-                        <outlet property="plotA" destination="hgd-3c-rUV" id="9Oc-xP-Eu8"/>
+                        <outlet property="numCellsLabel" destination="Uxu-M1-vzu" id="jVc-gy-6VU"/>
+                        <outlet property="plotA" destination="hgd-3c-rUV" id="zkn-yk-MV7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vrk-7P-Odt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

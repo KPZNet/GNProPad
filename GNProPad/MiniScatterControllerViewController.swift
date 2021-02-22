@@ -12,6 +12,8 @@ class MiniScatterControllerViewController: UIViewController {
 
     @IBOutlet weak var plotA: GNScatterPlotView!
     
+    @IBOutlet weak var numCellsLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,6 +28,8 @@ class MiniScatterControllerViewController: UIViewController {
     func SetPlotData(DataSet: XYGNDataSet, plotFormat: PLOT_TYPE)
     {
         plotA.SetPlotData(DataSet: DataSet, plotFormat: plotFormat)
+
+        numCellsLabel.text = String(format: "%d", DataSet.dataValues.count)
     }
 
     /*
